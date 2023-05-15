@@ -1,0 +1,196 @@
+#!/bin/env bash
+
+# Set Winver to 10.
+"$WINELOADER" winecfg /v win10
+
+# Change DPI (set in setup hook).
+hex_dpi=$(printf '%.8X\n' "$WINEDPI")
+
+echo "REGEDIT4
+
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Hardware Profiles\Current\Software\Fonts]
+\"LogPixels\"=dword:$hex_dpi
+" > sysdpi.reg
+
+echo "REGEDIT4
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+\"LogPixels\"=dword:$hex_dpi
+" > usrdpi.reg
+
+for r in usrdpi.reg sysdpi.reg; do
+   "$WINELOADER" regedit "$r"
+   rm -f "$r"
+done
+
+# Create initial Saymore.settings to allow overriding it's default values.
+mkdir -p "${WINEPREFIX}/drive_c/users/nate/AppData/Local/SayMore"
+sm_settings="${WINEPREFIX}/drive_c/users/nate/AppData/Local/SayMore/SayMore.settings"
+
+if [[ ! -f "$sm_settings" ]]; then
+  echo -e "<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<Settings>
+  <FirstTimeRun>True</FirstTimeRun>
+  <SessionScreenComponentsSplitterPos>
+  </SessionScreenComponentsSplitterPos>
+  <PersonContributionColumns>200,120,80,200</PersonContributionColumns>
+  <AnnotationEditorVideoWindowYtoXRatio>0.75</AnnotationEditorVideoWindowYtoXRatio>
+  <PersonCustomFieldsGrid>
+  </PersonCustomFieldsGrid>
+  <ProjectWindow />
+  <UnknownFileFieldsGrid>
+  </UnknownFileFieldsGrid>
+  <SessionRecorderDlg />
+  <PersonScreenComponentsSplitterPos>
+  </PersonScreenComponentsSplitterPos>
+  <SessionScreenComponentGrid>
+  </SessionScreenComponentGrid>
+  <MediaFileMoreInfoDlg />
+  <PersonListGrid>
+  </PersonListGrid>
+  <SessionsListGrid>
+  </SessionsListGrid>
+  <ProjectOtherDocumentsComponentGrid>
+  </ProjectOtherDocumentsComponentGrid>
+  <DefaultSegmentationMethod>
+  </DefaultSegmentationMethod>
+  <NewSessionsFromFilesLastFolder>
+  </NewSessionsFromFilesLastFolder>
+  <FreeTranslationWsForFWInterlinearExport>
+  </FreeTranslationWsForFWInterlinearExport>
+  <UserInterfaceLanguage>en</UserInterfaceLanguage>
+  <NewSessionsFromFilesDlgComponentGrid>
+  </NewSessionsFromFilesDlgComponentGrid>
+  <PersonScreenComponentGrid>
+  </PersonScreenComponentGrid>
+  <ImageFileFieldsGrid>
+  </ImageFileFieldsGrid>
+  <AllowStatisticsChartLabelsToWrap>
+  </AllowStatisticsChartLabelsToWrap>
+  <VideoFileFieldsGrid>
+  </VideoFileFieldsGrid>
+  <SessionScreenElementsListSplitterPos>
+  </SessionScreenElementsListSplitterPos>
+  <DefaultFolderForNewProjects>
+  </DefaultFolderForNewProjects>
+  <ContributorsGrid>
+  </ContributorsGrid>
+  <SessionCustomFieldsGrid>
+  </SessionCustomFieldsGrid>
+  <LastFolderForComponentFileAdd>
+  </LastFolderForComponentFileAdd>
+  <ArchivingDialog />
+  <ShowFFmpegDetailsWhenConvertingMedia>
+  </ShowFFmpegDetailsWhenConvertingMedia>
+  <ProgramToLaunchForIMDIPackage>Arbil\\\\arbil-stable.exe</ProgramToLaunchForIMDIPackage>
+  <NeedUpgrade>False</NeedUpgrade>
+  <MediaPlayerVolume>-1</MediaPlayerVolume>
+  <AnnotationEditorSpiltterPos>
+  </AnnotationEditorSpiltterPos>
+  <SegmentGrid>
+  </SegmentGrid>
+  <AudioFileFieldsGrid>
+  </AudioFileFieldsGrid>
+  <ManualSegmenterDlg />
+  <AnnotationEditorPlaybackSpeedIndex>0</AnnotationEditorPlaybackSpeedIndex>
+  <LocalizationDlgSettings>
+  </LocalizationDlgSettings>
+  <ConvertMediaDlg />
+  <TranscriptionWsForFWInterlinearExport>
+  </TranscriptionWsForFWInterlinearExport>
+  <TranslationPlaybackType>4</TranslationPlaybackType>
+  <NewSessionsFromFilesDlg />
+  <ZoomPercentageInAnnotationRecordingDlg>100</ZoomPercentageInAnnotationRecordingDlg>
+  <ZoomPercentageInManualSegmenterDlg>100</ZoomPercentageInManualSegmenterDlg>
+  <ProjectDescriptionDocumentsComponentGrid>
+  </ProjectDescriptionDocumentsComponentGrid>
+  <PersonScreenElementListSpiltterPos>
+  </PersonScreenElementListSpiltterPos>
+  <WelcomeDialog />
+  <TranscriptionPlaybackType>1</TranscriptionPlaybackType>
+  <MPlayerDebuggingOutputWindow />
+  <OralAnnotationRecorderDlg />
+  <MRUList type=\"System.Collections.Specialized.StringCollection\" />
+</Settings>
+" > "$sm_settings"
+fi
+
+# Set language to system language.
+lang=${LANG%%_*}
+if [[ "$(xmlstarlet select -t -v "//Settings/UserInterfaceLanguage" "$sm_settings")" != "$lang" ]]; then
+    xmlstarlet edit -L -u "//Settings/UserInterfaceLanguage" -v "$lang" "$sm_settings"
+fi 
+
+# Create initial "test" project and session to workaround fatal new-session error.
+test_proj_dir="${WINEPREFIX}/drive_c/users/${USER}/Documents/SayMore/test"
+mkdir -p "${test_proj_dir}/People"
+mkdir -p "${test_proj_dir}/Sessions/test"
+if [[ ! -f "${test_proj_dir}/test.sprj" ]]; then
+    echo '<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <transcriptionFont />
+  <freeTranslationFont />
+  <AutoSegmentersettings minSegmentLength="0" maxSegmentLength="0" preferrerdPauseLength="0" optimumLengthClampingFactor="0" />
+  <Title>test</Title>
+  <FundingProjectTitle />
+  <ProjectDescription />
+  <VernacularISO3CodeAndName />
+  <AnalysisISO3CodeAndName />
+  <Location />
+  <Region />
+  <Country>Unspecified</Country>
+  <Continent>Unspecified</Continent>
+  <ContactPerson />
+  <AccessProtocol />
+  <DateAvailable />
+  <RightsHolder />
+  <Depositor />
+  <IMDIOutputDirectory />
+</Project>' > "${test_proj_dir}/test.sprj"
+fi
+if [[ ! -f "${test_proj_dir}/Sessions/test/test.session" ]]; then
+    echo '<?xml version="1.0" encoding="utf-8"?>
+<Session>
+  <genre type="string">&lt;Inconnu&gt;</genre>
+</Session>' > "${test_proj_dir}/Sessions/test/test.session"
+fi
+
+# Force SayMore to open "test" project on 1st run.
+test_proj_path="C:\\users\\${USER}\\Documents\\SayMore\\test\\test.sprj"
+if [[ -z "$(xmlstarlet select -t -v "//Settings/MRUList/MRUList0" "$sm_settings")" ]]; then
+  xmlstarlet edit -L -s "//Settings/MRUList" -t elem -n "MRUList0" -v "$test_proj_path" "$sm_settings"
+fi
+# # Set FirstTimeRun to False.
+# if [[ "$(xmlstarlet select -t -v "//Settings/FirstTimeRun" "$sm_settings")" == 'True' ]]; then
+#   xmlstarlet edit -L -u "//Settings/FirstTimeRun" -v "False" "$sm_settings"
+# fi
+# Set WelcomeDialog values.
+if [[ -z "$(xmlstarlet select -t -v "//Settings/WelcomeDialog/windowSettings/state" "$sm_settings")" ]]; then
+  xmlstarlet edit -L \
+    -s "//Settings/WelcomeDialog" -t attr -n "type" -v "SIL.Windows.Forms.PortableSettingsProvider.FormSettings" \
+    -s "//Settings/WelcomeDialog" -t elem -n "windowSettings" \
+    -s "//Settings/WelcomeDialog/windowSettings" -t elem -n "state" -v "Normal" \
+    -s "//Settings/WelcomeDialog/windowSettings" -t elem -n "bounds" -v "489, 162, 621, 528" \
+    -s "//Settings/WelcomeDialog/windowSettings" -t elem -n "dpi" -v "$WINEDPI" \
+    "$sm_settings"
+fi
+# Set ProjectWindow values.
+if [[ -z "$(xmlstarlet select -t -v "//Settings/ProjectWindow/windowSettings/state" "$sm_settings")" ]]; then
+  xmlstarlet edit -L \
+    -s "//Settings/ProjectWindow" -t attr -n "type" -v "SIL.Windows.Forms.PortableSettingsProvider.FormSettings" \
+    -s "//Settings/ProjectWindow" -t elem -n "windowSettings" \
+    -s "//Settings/ProjectWindow/windowSettings" -t elem -n "state" -v "Maximized" \
+    -s "//Settings/ProjectWindow/windowSettings" -t elem -n "bounds" -v "50, 50, 1200, 900" \
+    -s "//Settings/ProjectWindow/windowSettings" -t elem -n "dpi" -v "$WINEDPI" \
+    "$sm_settings"
+fi
+
+# Copy in langtags.json.
+sldrcache_dir="${WINEPREFIX}/drive_c/ProgramData/SIL/SldrCache"
+mkdir -p "$sldrcache_dir"
+cp -f "${APP_SHARE_DIR}/data/langtags.json" "$sldrcache_dir"
+
+# Kill SayMore b/c it starts as part of install in addition to run,
+#   which doesn't allow pre-start script to run. The launch script 
+#   will start it again, at the correct time.
+pkill SayMore.exe

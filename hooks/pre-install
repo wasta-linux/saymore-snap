@@ -1,0 +1,17 @@
+#!/bin/env bash
+
+# Use local SayMoreInstaller.*.msi if path is set.
+if [[ -e "$INSTALL_EXE" ]]; then
+    export INSTALL_URL=
+fi
+
+# Match SayMore language UI to system locale.
+export LC_ALL="$LANG"
+
+# Set default DPI.
+if [[ -z "$WINEDPI" ]]; then
+    export WINEDPI=108
+fi
+
+# Set Winver to 10.
+"$WINELOADER" winecfg /v win10
