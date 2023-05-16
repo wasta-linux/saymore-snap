@@ -194,7 +194,11 @@ fi
 # Copy in langtags.json.
 sldrcache_dir="${WINEPREFIX}/drive_c/ProgramData/SIL/SldrCache"
 mkdir -p "$sldrcache_dir"
-cp -f "${APP_SHARE_DIR}/data/langtags.json" "$sldrcache_dir"
+base="$SNAP"
+if [[ -n "$APP_SHARE_DIR" ]]; then
+  base="$APP_SHARE_DIR"
+fi
+cp -f "${base}/data/langtags.json" "$sldrcache_dir"
 
 # Kill SayMore b/c it starts as part of install in addition to run,
 #   which doesn't allow pre-start script to run. The launch script 
