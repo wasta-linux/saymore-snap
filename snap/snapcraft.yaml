@@ -17,6 +17,7 @@ architectures:
   - amd64
 
 environment:
+  LD_PRELOAD: "$LD_PRELOAD:${SNAP}/gnome-platform/lib/${SNAP_LAUNCHER_ARCH_TRIPLET}/bindtextdomain.so"
   TRICKS: "corefonts dotnet462"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
 
@@ -90,6 +91,7 @@ parts:
     plugin: nil
     stage-packages:
     - xmlstarlet
+    - yad
 
   hooks:
     plugin: dump
@@ -104,7 +106,7 @@ parts:
     source: https://github.com/snapcrafters/sommelier-core.git
     source-branch: "1.0"
     override-prime: |
-      snapcraftctl prime
+      craftctl prime # use snapcraftctl if core20 or earlier
 
       # Don't let yad dialogs stay always-on-top.
       sed -r -i 's|(yad.*) --on-top|\1|g' bin/sommelier
