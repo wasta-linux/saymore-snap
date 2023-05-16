@@ -106,7 +106,7 @@ parts:
     source: https://github.com/snapcrafters/sommelier-core.git
     source-branch: "1.0"
     override-prime: |
-      craftctl prime # use snapcraftctl if core20 or earlier
+      craftctl default # use "snapcraftctl prime" if core20 or earlier
 
       # Don't let yad dialogs stay always-on-top.
       sed -r -i 's|(yad.*) --on-top|\1|g' bin/sommelier
