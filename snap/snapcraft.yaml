@@ -83,11 +83,13 @@ parts:
     source: data/
     organize:
       "*": data/
-    stage-packages:
-      - procps
-      - xmlstarlet
     stage:
       - data
+
+  debs:
+    plugin: nil
+    stage-packages:
+    - xmlstarlet
 
   hooks:
     plugin: dump
