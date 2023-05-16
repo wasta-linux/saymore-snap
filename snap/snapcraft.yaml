@@ -83,6 +83,9 @@ parts:
     source: data/
     organize:
       "*": data/
+    stage-packages:
+      - procps
+      - xmlstarlet
     stage:
       - data
 
