@@ -2,7 +2,7 @@ name: saymore-unofficial
 base: core22
 version: '3.5.1' # matches installer version below
 grade: stable
-summary: Created to make common Language Documentation tasks fun and keep you productive.
+summary: Make common Language Documentation tasks fun and keep you productive.
 description: |
   Recording speakers of the world’s languages is fun and rewarding, but keeping all the resulting
   files and meta data organized? Converting files to archive formats? Transcription? Painful.
