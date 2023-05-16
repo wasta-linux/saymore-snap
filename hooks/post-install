@@ -123,7 +123,7 @@ fi
 
 # Create initial "test" project to workaround fatal new-session and new-person errors.
 test_proj_dir="${WINEPREFIX}/drive_c/users/${USER}/Documents/SayMore/test"
-mkdir -p "${test_proj_dir}/People/test"
+mkdir -p "${test_proj_dir}/People/New Person"
 mkdir -p "${test_proj_dir}/Sessions/test"
 if [[ ! -f "${test_proj_dir}/test.sprj" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
@@ -156,13 +156,9 @@ if [[ ! -f "${test_proj_dir}/Sessions/test/test.session" ]]; then
 </Session>' > "${test_proj_dir}/Sessions/test/test.session"
 fi
 # Create test person.
-if [[ ! -f "${test_proj_dir}/People/test/test.session" ]]; then
+if [[ ! -f "${test_proj_dir}/People/New Person/New Person.session" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
-<Person>
-  <CustomFields>
-    <name type="string">New Person</name>
-  </CustomFields>
-</Person>' > "${test_proj_dir}/People/test/test.session"
+<Person />' > "${test_proj_dir}/People/New Person/New Person.session"
 fi
 
 # Force SayMore to open "test" project on 1st run.
