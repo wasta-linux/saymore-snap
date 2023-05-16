@@ -19,8 +19,8 @@ architectures:
 environment:
   TRICKS: "corefonts dotnet462"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
-  # WINELOADER: ${SNAP}/wine-platform/wine-stable/bin/wine64
-  WINE: "$WINELOADER" # needed for winetricks?
+  WINELOADER: ${SNAP}/wine-platform/wine-stable/bin/wine64
+  WINE: "$WINELOADER" # needed for winetricks
 
 apps:
   saymore-unofficial:
@@ -92,7 +92,6 @@ parts:
     plugin: nil
     stage-packages:
     - xmlstarlet
-    - yad
 
   hooks:
     plugin: dump
@@ -114,6 +113,7 @@ parts:
 
       # Don't let yad dialogs stay always-on-top.
       sed -r -i 's|(yad.*) --on-top|\1|g' bin/sommelier
+      # Use tee with yad input to show 
       # Remove annoying yad dialog for interactive MSI install.
       sed -r -i 's|(yes.*Installing .*EXE_NAME.*)|# \1|' bin/sommelier
       sed -r -i 's|(.*INSTALL_YAD_PID)|# \1|g' bin/sommelier
