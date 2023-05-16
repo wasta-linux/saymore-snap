@@ -121,9 +121,9 @@ if [[ "$(xmlstarlet select -t -v "//Settings/UserInterfaceLanguage" "$sm_setting
     xmlstarlet edit -L -u "//Settings/UserInterfaceLanguage" -v "$lang" "$sm_settings"
 fi 
 
-# Create initial "test" project and session to workaround fatal new-session error.
+# Create initial "test" project to workaround fatal new-session and new-person errors.
 test_proj_dir="${WINEPREFIX}/drive_c/users/${USER}/Documents/SayMore/test"
-mkdir -p "${test_proj_dir}/People"
+mkdir -p "${test_proj_dir}/People/test"
 mkdir -p "${test_proj_dir}/Sessions/test"
 if [[ ! -f "${test_proj_dir}/test.sprj" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
@@ -148,11 +148,21 @@ if [[ ! -f "${test_proj_dir}/test.sprj" ]]; then
   <IMDIOutputDirectory />
 </Project>' > "${test_proj_dir}/test.sprj"
 fi
+# Create test session.
 if [[ ! -f "${test_proj_dir}/Sessions/test/test.session" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
 <Session>
   <genre type="string">&lt;Inconnu&gt;</genre>
 </Session>' > "${test_proj_dir}/Sessions/test/test.session"
+fi
+# Create test person.
+if [[ ! -f "${test_proj_dir}/People/test/test.session" ]]; then
+    echo '<?xml version="1.0" encoding="utf-8"?>
+<Person>
+  <CustomFields>
+    <name type="string">New Person</name>
+  </CustomFields>
+</Person>' > "${test_proj_dir}/People/test/test.session"
 fi
 
 # Force SayMore to open "test" project on 1st run.
