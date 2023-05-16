@@ -1,28 +1,30 @@
-name: saymore
+name: saymore-unofficial
 base: core22
 version: '3.5.1' # matches installer version below
 grade: stable
-summary: Create language-specific maps, charts, diagrams, and timelines.
+summary: Created to make common Language Documentation tasks fun and keep you productive.
 description: |
-  Map Creator simplifies the creation of language-specific maps, charts, diagrams, and timelines for Bible lessons and world geography.
+  Recording speakers of the world’s languages is fun and rewarding, but keeping all the resulting
+  files and meta data organized? Converting files to archive formats? Transcription? Painful.
 
+  That’s why we built SayMore – to make common Language Documentation tasks fun and keep you productive.
 confinement: strict
-architectures:
-  - amd64
-
 license: MIT
 contact: https://github.com/wasta-linux/saymore-snap/issues
+issues: https://github.com/wasta-linux/saymore-snap/issues
+icon: snap/gui/saymore-unofficial.png
+architectures:
+  - amd64
 
 environment:
   TRICKS: "corefonts dotnet462"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
 
 apps:
-  map-creator:
+  saymore-unofficial:
     extensions: [gnome]
     command: bin/sommelier run-exe
     environment:
-      # MapCreator downloads: http://fmosoft.com/download
       INSTALL_EXE: "data/SayMoreInstaller.3.5.1.msi"
       INSTALL_FLAGS: "/passive"
       RUN_EXE: "C:/Program Files (x86)/SayMore/SayMore.exe"
@@ -62,10 +64,9 @@ plugs:
   desktop-legacy:
   home:
   network:
-  # network-bind:
   removable-media:
-  x11:
   wayland:
+  x11:
 
   wine-runtime:
     interface: content
@@ -77,6 +78,14 @@ plugs:
     default-provider: wine-platform-7-stable-core22
 
 parts:
+  data:
+    plugin: dump
+    source: data/
+    organize:
+      "*": data/
+    stage:
+      - data
+
   hooks:
     plugin: dump
     source: hooks/

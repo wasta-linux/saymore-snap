@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=SayMore
+Comment=Language documentation (via WINE)
+Exec=saymore-unofficial
+Icon=${SNAP}/meta/gui/saymore-unofficial.png
+Terminal=false
+Type=Application
+Categories=Education;Science;
+StartupWMClass=saymore.exe
+StartupNotify=false
+Keywords=SayMore;
