@@ -17,7 +17,7 @@ architectures:
   - amd64
 
 environment:
-  LD_PRELOAD: "$LD_PRELOAD:${SNAP}/lib/i386-linux-gnu/bindtextdomain.so"
+  # LD_PRELOAD: "$LD_PRELOAD:${SNAP}/lib/i386-linux-gnu/bindtextdomain.so"
   TRICKS: "corefonts dotnet462"
   # WINEARCH: "win64"
   WINEARCH: "win32"
