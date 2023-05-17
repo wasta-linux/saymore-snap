@@ -110,7 +110,9 @@ parts:
     build-packages:
       - xmlstarlet
     override-build:
-      cp "$(which xmlstarlet)" "${SNAPCRAFT_STAGE}/usr/bin/"
+      stage_bin="${SNAPCRAFT_STAGE}/bin/"
+      mkdir -p "$stage_bin"
+      cp "$(which xmlstarlet)" "$stage_bin"
 
   hooks:
     plugin: dump
