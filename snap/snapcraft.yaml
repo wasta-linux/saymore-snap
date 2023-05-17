@@ -1,6 +1,8 @@
 name: saymore-unofficial
-base: core20
-# base: core22 # problems with bindtextdomain.so
+# base: core22 # problems with bindtextdomain.so:
+# ERROR: ld.so: object '/snap/saymore-unofficial/17/gnome-platform/$LIB/bindtextdomain.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+# base: core20 # problems with bindtextdomain.so
+base: core18
 version: '3.5.1' # matches installer version below
 grade: stable
 summary: Make common Language Documentation tasks fun and keep you productive.
@@ -28,8 +30,9 @@ environment:
 
 apps:
   saymore-unofficial:
-    extensions: [gnome-3-38] # [gnome]
     # extensions: [gnome]
+    # extensions: [gnome-3-38]
+    extensions: [gnome-3-34]
     command: bin/sommelier run-exe
     environment:
       INSTALL_EXE: "data/SayMoreInstaller.3.5.1.msi"
@@ -38,41 +41,29 @@ apps:
       # RUN_EXE: "C:/Program Files/SayMore/SayMore.exe"
 
   init:
-    extensions: [gnome-3-38] # [gnome]
     # extensions: [gnome]
+    # extensions: [gnome-3-38]
+    extensions: [gnome-3-34]
     command: bin/sommelier
     environment:
       INIT: '1'
 
   reinstall-dotnet:
-    extensions: [gnome-3-38] # [gnome]
     # extensions: [gnome]
+    # extensions: [gnome-3-38]
+    extensions: [gnome-3-34]
     command: bin/sommelier winetricks -f -q dotnet462
 
-  wine:
-    extensions: [gnome-3-38] # [gnome]
-    # extensions: [gnome]
-    command: bin/sommelier
-    # environment:
-    #   WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine"
-    #   WINE: "$WINELOADER"
-
-  wine64:
-    extensions: [gnome-3-38] # [gnome]
-    # extensions: [gnome]
-    command: bin/sommelier
-    environment:
-      WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine64"
-      WINE: "$WINELOADER"
-
   winecfg:
-    extensions: [gnome-3-38] # [gnome]
     # extensions: [gnome]
+    # extensions: [gnome-3-38]
+    extensions: [gnome-3-34]
     command: bin/sommelier winecfg
 
   winetricks:
-    extensions: [gnome-3-38] # [gnome]
     # extensions: [gnome]
+    # extensions: [gnome-3-38]
+    extensions: [gnome-3-34]
     command: bin/sommelier winetricks
 
 plugs:
@@ -85,16 +76,32 @@ plugs:
   wayland:
   x11:
 
-  wine-runtime-c20:
+  # wine-runtime-c22:
+  #   interface: content
+  #   target: $SNAP/wine-runtime
+  #   default-provider: wine-platform-runtime-core22
+  # wine-platform-7-stable-c22:
+  #   interface: content
+  #   target: $SNAP/wine-platform
+  #   default-provider: wine-platform-7-stable-core22
+
+  # wine-runtime-c20:
+  #   interface: content
+  #   target: $SNAP/wine-runtime
+  #   default-provider: wine-platform-runtime-core20
+  # wine-platform-7-stable-c20:
+  #   interface: content
+  #   target: $SNAP/wine-platform
+  #   default-provider: wine-platform-7-stable-core20
+
+  wine-runtime:
     interface: content
     target: $SNAP/wine-runtime
-    # default-provider: wine-platform-runtime-core22
-    default-provider: wine-platform-runtime-core20
-  wine-platform-7-stable-c20:
+    default-provider: wine-platform-runtime
+  wine-platform-6-stable:
     interface: content
     target: $SNAP/wine-platform
-    # default-provider: wine-platform-7-stable-core22
-    default-provider: wine-platform-7-stable-core20
+    default-provider: wine-platform-6-stable
 
 parts:
   data:
@@ -126,7 +133,7 @@ parts:
     source-branch: "1.0"
     override-prime: |
       # craftctl default # core22
-      snapcraftctl prime # core20
+      snapcraftctl prime # core20/core18
 
       # Override $WINELOADER to use wine64.
       # sed -r -i 's|(export WINELOADER="\$WINE_PLATFORM/bin/wine)|\164|' bin/sommelier
