@@ -109,8 +109,8 @@ parts:
     plugin: nil
     build-packages: # or "stage-packages" with no "stage" key.
       - xmlstarlet
-    stage:
-      - usr/bin/xmlstarlet
+    override-prime:
+      cp "${SNAPCRAFT_PART_BUILD}/usr/bin/xmlstarlet" "${SNAPCRAFT_STAGE}/usr/bin/"
 
   hooks:
     plugin: dump
