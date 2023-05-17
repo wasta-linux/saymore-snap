@@ -1,8 +1,8 @@
 name: saymore-unofficial
 # base: core22 # problems with bindtextdomain.so:
 # ERROR: ld.so: object '/snap/saymore-unofficial/17/gnome-platform/$LIB/bindtextdomain.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
-# base: core20 # problems with bindtextdomain.so
-base: core18
+base: core20 # problems with bindtextdomain.so
+# base: core18 # dotnet45 is broken on wine-6.0
 version: '3.5.1' # matches installer version below
 grade: stable
 summary: Make common Language Documentation tasks fun and keep you productive.
@@ -16,23 +16,22 @@ license: MIT
 contact: https://github.com/wasta-linux/saymore-snap/issues
 issues: https://github.com/wasta-linux/saymore-snap/issues
 icon: snap/gui/saymore-unofficial.png
+# compression: lzo
 architectures:
   - amd64
 
 environment:
-  # LD_PRELOAD: "$LD_PRELOAD:${SNAP}/lib/i386-linux-gnu/bindtextdomain.so"
+  SYSTEM_WGETRC: $SNAP/wine-runtime/etc/wgetrc
   TRICKS: "corefonts dotnet462"
   WINEARCH: "win64"
   # WINEARCH: "win32"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
-  # WINELOADER: ${SNAP}/wine-platform/wine-stable/bin/wine64
-  # WINE: "$WINELOADER" # needed for winetricks
 
 apps:
   saymore-unofficial:
     # extensions: [gnome]
-    # extensions: [gnome-3-38]
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-38]
+    # extensions: [gnome-3-34]
     command: bin/sommelier run-exe
     environment:
       INSTALL_EXE: "data/SayMoreInstaller.3.5.1.msi"
@@ -42,28 +41,28 @@ apps:
 
   init:
     # extensions: [gnome]
-    # extensions: [gnome-3-38]
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-38]
+    # extensions: [gnome-3-34]
     command: bin/sommelier
     environment:
       INIT: '1'
 
   reinstall-dotnet:
     # extensions: [gnome]
-    # extensions: [gnome-3-38]
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-38]
+    # extensions: [gnome-3-34]
     command: bin/sommelier winetricks -f -q dotnet462
 
   winecfg:
     # extensions: [gnome]
-    # extensions: [gnome-3-38]
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-38]
+    # extensions: [gnome-3-34]
     command: bin/sommelier winecfg
 
   winetricks:
     # extensions: [gnome]
-    # extensions: [gnome-3-38]
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-38]
+    # extensions: [gnome-3-34]
     command: bin/sommelier winetricks
 
 plugs:
@@ -85,23 +84,23 @@ plugs:
   #   target: $SNAP/wine-platform
   #   default-provider: wine-platform-7-stable-core22
 
-  # wine-runtime-c20:
-  #   interface: content
-  #   target: $SNAP/wine-runtime
-  #   default-provider: wine-platform-runtime-core20
-  # wine-platform-7-stable-c20:
-  #   interface: content
-  #   target: $SNAP/wine-platform
-  #   default-provider: wine-platform-7-stable-core20
-
-  wine-runtime:
+  wine-runtime-c20:
     interface: content
     target: $SNAP/wine-runtime
-    default-provider: wine-platform-runtime
-  wine-6-stable:
+    default-provider: wine-platform-runtime-core20
+  wine-7-stable:
     interface: content
     target: $SNAP/wine-platform
-    default-provider: wine-platform-6-stable
+    default-provider: wine-platform-7-stable-core20
+
+  # wine-runtime:
+  #   interface: content
+  #   target: $SNAP/wine-runtime
+  #   default-provider: wine-platform-runtime
+  # wine-6-stable:
+  #   interface: content
+  #   target: $SNAP/wine-platform
+  #   default-provider: wine-platform-6-stable
 
 parts:
   data:
@@ -119,6 +118,20 @@ parts:
     prime:
       - usr/bin/xmlstarlet
 
+  # This reverts changes from https://github.com/snapcore/snapcraft/pull/3586
+  fix-fontconfig:
+    plugin: nil
+    after: [gnome-3-38-extension]
+    override-prime: |
+      sed -i '/snap-package/,+1d' $SNAPCRAFT_PRIME/snap/command-chain/desktop-launch
+
+  fix-bindtext:
+    plugin: nil
+    after: [gnome-3-38-extension]
+    override-prime: |
+      sed -i "$(grep -in bindtext $SNAPCRAFT_PRIME/snap/command-chain/desktop-launch | cut -d':' -f1 | tail -2 | head -1)d" $SNAPCRAFT_PRIME/snap/command-chain/desktop-launch
+      sed -i "$(grep -in bindtext $SNAPCRAFT_PRIME/snap/command-chain/desktop-launch | cut -d':' -f1 | tail -1)d" $SNAPCRAFT_PRIME/snap/command-chain/desktop-launch
+
   hooks:
     plugin: dump
     source: hooks/
@@ -129,8 +142,10 @@ parts:
 
   sommelier-core:
     plugin: make
-    source: https://github.com/snapcrafters/sommelier-core.git
-    source-branch: "1.0"
+    # source: https://github.com/snapcrafters/sommelier-core.git
+    # source-branch: "1.0"
+    source: https://github.com/mmtrt/sommelier-core.git # to make core20 work
+    source-branch: "core20"
     override-prime: |
       # craftctl default # core22
       snapcraftctl prime # core20/core18
