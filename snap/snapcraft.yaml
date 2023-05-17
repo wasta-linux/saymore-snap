@@ -85,12 +85,12 @@ plugs:
   wayland:
   x11:
 
-  wine-runtime:
+  wine-runtime-c20:
     interface: content
     target: $SNAP/wine-runtime
     # default-provider: wine-platform-runtime-core22
     default-provider: wine-platform-runtime-core20
-  wine-platform:
+  wine-platform-7-stable-c20:
     interface: content
     target: $SNAP/wine-platform
     # default-provider: wine-platform-7-stable-core22
