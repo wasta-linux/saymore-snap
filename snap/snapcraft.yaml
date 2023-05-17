@@ -17,11 +17,12 @@ architectures:
   - amd64
 
 environment:
+  LD_PRELOAD: "$LD_PRELOAD:${SNAP}/lib/i386-linux-gnu/bindtextdomain.so"
   TRICKS: "corefonts dotnet462"
   WINEARCH: "win64"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
-  WINELOADER: ${SNAP}/wine-platform/wine-stable/bin/wine64
-  WINE: "$WINELOADER" # needed for winetricks
+  # WINELOADER: ${SNAP}/wine-platform/wine-stable/bin/wine64
+  # WINE: "$WINELOADER" # needed for winetricks
 
 apps:
   saymore-unofficial:
@@ -110,7 +111,7 @@ parts:
       craftctl default # use "snapcraftctl prime" if core20 or earlier
 
       # Override $WINELOADER to use wine64.
-      sed -r -i 's|(export WINELOADER="\$WINE_PLATFORM/bin/wine)|\164|' bin/sommelier
+      # sed -r -i 's|(export WINELOADER="\$WINE_PLATFORM/bin/wine)|\164|' bin/sommelier
 
       # Don't let yad dialogs stay always-on-top.
       sed -r -i 's|(yad.*) --on-top|\1|g' bin/sommelier
