@@ -1,5 +1,5 @@
 name: saymore-unofficial
-base: core22
+base: core20 # core22
 version: '3.5.1' # matches installer version below
 grade: stable
 summary: Make common Language Documentation tasks fun and keep you productive.
@@ -36,32 +36,32 @@ apps:
       RUN_EXE: "C:/Program Files/SayMore/SayMore.exe"
 
   init:
-    extensions: [gnome]
+    extensions: [gnome-3-38] # [gnome]
     command: bin/sommelier
     environment:
       INIT: '1'
 
   reinstall-dotnet:
-    extensions: [gnome]
+    extensions: [gnome-3-38] # [gnome]
     command: bin/sommelier winetricks -f -q dotnet462
 
   wine:
-    extensions: [gnome]
+    extensions: [gnome-3-38] # [gnome]
     command: bin/sommelier
     environment:
       WINELOADER: "${SNAP}/wine-platform/wine-stable/bin/wine"
       WINE: "$WINELOADER"
 
   wine64:
-    extensions: [gnome]
+    extensions: [gnome-3-38] # [gnome]
     command: bin/sommelier
 
   winecfg:
-    extensions: [gnome]
+    extensions: [gnome-3-38] # [gnome]
     command: bin/sommelier winecfg
 
   winetricks:
-    extensions: [gnome]
+    extensions: [gnome-3-38] # [gnome]
     command: bin/sommelier winetricks
 
 plugs:
@@ -77,11 +77,13 @@ plugs:
   wine-runtime:
     interface: content
     target: $SNAP/wine-runtime
-    default-provider: wine-platform-runtime-core22
+    # default-provider: wine-platform-runtime-core22
+    default-provider: wine-platform-runtime-core20
   wine-7-stable:
     interface: content
     target: $SNAP/wine-platform
-    default-provider: wine-platform-7-stable-core22
+    # default-provider: wine-platform-7-stable-core22
+    default-provider: wine-platform-7-stable-core20
 
 parts:
   data:
@@ -110,7 +112,8 @@ parts:
     source: https://github.com/snapcrafters/sommelier-core.git
     source-branch: "1.0"
     override-prime: |
-      craftctl default # use "snapcraftctl prime" if core20 or earlier
+      # craftctl default # core22
+      snapcraftctl prime # core20
 
       # Override $WINELOADER to use wine64.
       # sed -r -i 's|(export WINELOADER="\$WINE_PLATFORM/bin/wine)|\164|' bin/sommelier
