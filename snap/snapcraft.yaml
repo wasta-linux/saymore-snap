@@ -27,7 +27,7 @@ environment:
 
 apps:
   saymore-unofficial:
-    extensions: [gnome]
+    extensions: [gnome-3-38] # [gnome]
     command: bin/sommelier run-exe
     environment:
       INSTALL_EXE: "data/SayMoreInstaller.3.5.1.msi"
