@@ -47,7 +47,7 @@ apps:
   kill-saymore:
     # extensions: [gnome]
     extensions: [gnome-3-38]
-    command: pkill SayMore.exe
+    command: usr/bin/pkill SayMore.exe
 
   reinstall-dotnet:
     # extensions: [gnome]
