@@ -80,6 +80,7 @@ plugs:
   desktop-legacy:
   home:
   network:
+  physical-memory-observe:
   process-control:
   removable-media:
   system-observe:
