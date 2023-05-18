@@ -2,7 +2,7 @@
 
 ### This is sourced by wine-launch/launch-app.sh. It serves the same purpose as sommelier' snapcraft.yaml.
 
-export APP_SHARE_DIR="${HOME}/g/saymore-snap"
+export APP_SHARE_DIR="$PWD"
 
 export TRICKS="corefonts fontsmooth=rgb dotnet462"
 export INSTALL_FLAGS="/passive" # /qn for silent (MSI)
