@@ -3,7 +3,6 @@ name: saymore-unofficial
 # ERROR: ld.so: object '/snap/saymore-unofficial/17/gnome-platform/$LIB/bindtextdomain.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
 # core20 ideas from https://github.com/mmtrt/notepad-plus-plus
 base: core20 # problems with bindtextdomain.so
-# base: core18 # dotnet45 is broken on wine-6.0
 version: '3.5.1' # matches installer version below
 grade: stable
 summary: Make common Language Documentation tasks fun and keep you productive.
@@ -17,7 +16,6 @@ license: MIT
 contact: https://github.com/wasta-linux/saymore-snap/issues
 issues: https://github.com/wasta-linux/saymore-snap/issues
 icon: snap/gui/saymore-unofficial.png
-# compression: lzo
 architectures:
   - amd64
 
@@ -32,7 +30,6 @@ apps:
   saymore-unofficial:
     # extensions: [gnome]
     extensions: [gnome-3-38]
-    # extensions: [gnome-3-34]
     command: bin/sommelier run-exe
     environment:
       INSTALL_EXE: "${SNAP}/data/SayMoreInstaller.3.5.1.msi"
@@ -43,7 +40,6 @@ apps:
   init:
     # extensions: [gnome]
     extensions: [gnome-3-38]
-    # extensions: [gnome-3-34]
     command: bin/sommelier
     environment:
       INIT: '1'
@@ -56,7 +52,6 @@ apps:
   reinstall-dotnet:
     # extensions: [gnome]
     extensions: [gnome-3-38]
-    # extensions: [gnome-3-34]
     command: bin/sommelier winetricks -f -q dotnet462
 
   remove-wine-prefix:
@@ -67,19 +62,16 @@ apps:
   wine:
     # extensions: [gnome]
     extensions: [gnome-3-38]
-    # extensions: [gnome-3-34]
     command: bin/sommelier $WINELOADER
 
   winecfg:
     # extensions: [gnome]
     extensions: [gnome-3-38]
-    # extensions: [gnome-3-34]
     command: bin/sommelier winecfg
 
   winetricks:
     # extensions: [gnome]
     extensions: [gnome-3-38]
-    # extensions: [gnome-3-34]
     command: bin/sommelier winetricks
 
 plugs:
@@ -88,6 +80,7 @@ plugs:
   desktop-legacy:
   home:
   network:
+  process-control:
   removable-media:
   system-observe:
   system-trace:
@@ -112,15 +105,6 @@ plugs:
     target: $SNAP/wine-platform
     default-provider: wine-platform-7-stable-core20
 
-  # wine-runtime:
-  #   interface: content
-  #   target: $SNAP/wine-runtime
-  #   default-provider: wine-platform-runtime
-  # wine-6-stable:
-  #   interface: content
-  #   target: $SNAP/wine-platform
-  #   default-provider: wine-platform-6-stable
-
 parts:
   data:
     plugin: dump
@@ -144,6 +128,7 @@ parts:
     override-prime: |
       sed -i '/snap-package/,+1d' $SNAPCRAFT_PRIME/snap/command-chain/desktop-launch
 
+  # Ref: https://github.com/mmtrt/notepad-plus-plus
   fix-bindtext:
     plugin: nil
     after: [gnome-3-38-extension]
@@ -167,7 +152,7 @@ parts:
     # source-branch: "core20"
     override-prime: |
       # craftctl default # core22
-      snapcraftctl prime # core20/core18
+      snapcraftctl prime # core20
 
       # Don't let yad dialogs stay always-on-top.
       sed -r -i 's|(yad.*) --on-top|\1|g' bin/sommelier
