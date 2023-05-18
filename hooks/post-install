@@ -124,7 +124,7 @@ fi
 # Create initial "test" project to workaround fatal new-session and new-person errors.
 test_proj_dir="${WINEPREFIX}/drive_c/users/${USER}/Documents/SayMore/test"
 mkdir -p "${test_proj_dir}/People/New Person"
-mkdir -p "${test_proj_dir}/Sessions/test"
+mkdir -p "${test_proj_dir}/Sessions/New Session"
 if [[ ! -f "${test_proj_dir}/test.sprj" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
 <Project>
@@ -148,17 +148,23 @@ if [[ ! -f "${test_proj_dir}/test.sprj" ]]; then
   <IMDIOutputDirectory />
 </Project>' > "${test_proj_dir}/test.sprj"
 fi
+# Create test person.
+person_file="${test_proj_dir}/People/New Person/New Person.person"
+if [[ ! -f "$person_file" ]]; then
+    echo '<?xml version="1.0" encoding="utf-8"?>
+<Person>
+  <name type="string">New Person</name>
+  <languages type="xml"></languages>
+  <contributions type="xml"></contributions>
+</Person>' > "$person_file"
+fi
 # Create test session.
-if [[ ! -f "${test_proj_dir}/Sessions/test/test.session" ]]; then
+session_file="${test_proj_dir}/Sessions/New Session/New Session.session"
+if [[ ! -f "$session_file" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
 <Session>
-  <genre type="string">&lt;Inconnu&gt;</genre>
-</Session>' > "${test_proj_dir}/Sessions/test/test.session"
-fi
-# Create test person.
-if [[ ! -f "${test_proj_dir}/People/New Person/New Person.session" ]]; then
-    echo '<?xml version="1.0" encoding="utf-8"?>
-<Person />' > "${test_proj_dir}/People/New Person/New Person.session"
+  <genre type="string">&lt;Unknown&gt;</genre>
+</Session>' > "$session_file"
 fi
 
 # Force SayMore to open "test" project on 1st run.
