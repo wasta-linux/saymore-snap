@@ -34,7 +34,7 @@ apps:
     # extensions: [gnome-3-34]
     command: bin/sommelier run-exe
     environment:
-      INSTALL_EXE: "data/SayMoreInstaller.3.5.1.msi"
+      INSTALL_EXE: "${SNAP}/data/SayMoreInstaller.3.5.1.msi"
       INSTALL_FLAGS: "/passive"
       RUN_EXE: "C:/Program Files (x86)/SayMore/SayMore.exe"
       # RUN_EXE: "C:/Program Files/SayMore/SayMore.exe"
@@ -51,7 +51,16 @@ apps:
     # extensions: [gnome]
     extensions: [gnome-3-38]
     # extensions: [gnome-3-34]
-    command: bin/sommelier winetricks -f -q dotnet462
+    command: |
+      bin/sommelier winetricks -f -q dotnet462 \
+        | yad --progress --title="Reinstalling .NET 4.6.2" \
+          --width=400 --center --no-buttons --auto-close --auto-kill --no-escape
+
+  wine:
+    # extensions: [gnome]
+    extensions: [gnome-3-38]
+    # extensions: [gnome-3-34]
+    command: bin/sommelier "$WINELOADER"
 
   winecfg:
     # extensions: [gnome]
