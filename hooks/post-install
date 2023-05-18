@@ -122,10 +122,10 @@ if [[ "$(xmlstarlet select -t -v "//Settings/UserInterfaceLanguage" "$sm_setting
 fi 
 
 # Create initial "test" project to workaround fatal new-session and new-person errors.
-test_proj_dir="${WINEPREFIX}/drive_c/users/${USER}/Documents/SayMore/test"
-mkdir -p "${test_proj_dir}/People/New Person"
-mkdir -p "${test_proj_dir}/Sessions/New Session"
-if [[ ! -f "${test_proj_dir}/test.sprj" ]]; then
+proj_name="test"
+test_proj_dir="${WINEPREFIX}/drive_c/users/${USER}/Documents/SayMore/${proj_name}"
+mkdir -p "$test_proj_dir"
+if [[ ! -f "${test_proj_dir}/${proj_name}.sprj" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <transcriptionFont />
@@ -146,24 +146,26 @@ if [[ ! -f "${test_proj_dir}/test.sprj" ]]; then
   <RightsHolder />
   <Depositor />
   <IMDIOutputDirectory />
-</Project>' > "${test_proj_dir}/test.sprj"
+</Project>' > "${test_proj_dir}/${proj_name}.sprj"
 fi
 # Create test person.
+mkdir -p "${test_proj_dir}/People/New Person"
 person_file="${test_proj_dir}/People/New Person/New Person.person"
 if [[ ! -f "$person_file" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
 <Person>
-  <name type="string">New Person</name>
-  <languages type="xml"></languages>
-  <contributions type="xml"></contributions>
+  <privacyProtection type="string">false</privacyProtection>
 </Person>' > "$person_file"
 fi
 # Create test session.
+mkdir -p "${test_proj_dir}/Sessions/New Session"
 session_file="${test_proj_dir}/Sessions/New Session/New Session.session"
 if [[ ! -f "$session_file" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
-<Session>
+<Session version="2.0">
   <genre type="string">&lt;Unknown&gt;</genre>
+  <participants type="string"></participants>
+  <contributions type="xml" />
 </Session>' > "$session_file"
 fi
 
