@@ -117,8 +117,12 @@ parts:
   debs:
     plugin: nil
     stage-packages:
+      - procps
       - xmlstarlet
     prime:
+      - bin/kill
+      - usr/bin/pgrep
+      - usr/bin/pkill
       - usr/bin/xmlstarlet
 
   # This reverts changes from https://github.com/snapcore/snapcraft/pull/3586
