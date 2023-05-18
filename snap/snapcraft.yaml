@@ -2,7 +2,7 @@ name: saymore-unofficial
 # base: core22 # problems with bindtextdomain.so:
 # ERROR: ld.so: object '/snap/saymore-unofficial/17/gnome-platform/$LIB/bindtextdomain.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
 # core20 ideas from https://github.com/mmtrt/notepad-plus-plus
-base: core20 # problems with bindtextdomain.so
+base: core20
 version: '3.5.1' # matches installer version below
 grade: stable
 summary: Make common Language Documentation tasks fun and keep you productive.
