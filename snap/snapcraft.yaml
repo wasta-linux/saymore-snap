@@ -1,6 +1,7 @@
 name: saymore-unofficial
 # base: core22 # problems with bindtextdomain.so:
 # ERROR: ld.so: object '/snap/saymore-unofficial/17/gnome-platform/$LIB/bindtextdomain.so' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+# core20 ideas from https://github.com/mmtrt/notepad-plus-plus
 base: core20 # problems with bindtextdomain.so
 # base: core18 # dotnet45 is broken on wine-6.0
 version: '3.5.1' # matches installer version below
@@ -51,10 +52,7 @@ apps:
     # extensions: [gnome]
     extensions: [gnome-3-38]
     # extensions: [gnome-3-34]
-    command: |
-      bin/sommelier winetricks -f -q dotnet462 \
-        | yad --progress --title="Reinstalling .NET 4.6.2" \
-          --width=400 --center --no-buttons --auto-close --auto-kill --no-escape
+    command: bin/sommelier winetricks -f -q dotnet462
 
   wine:
     # extensions: [gnome]
