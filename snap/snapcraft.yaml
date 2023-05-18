@@ -79,6 +79,8 @@ plugs:
   home:
   network:
   removable-media:
+  system-observe:
+  system-trace:
   wayland:
   x11:
 
