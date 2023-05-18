@@ -75,16 +75,13 @@ apps:
     command: bin/sommelier winetricks
 
 plugs:
+  # something that allows "ptrace" is needed for confinement to work; use --devmode as a workaround
   audio-playback:
   desktop:
   desktop-legacy:
   home:
   network:
-  physical-memory-observe:
-  process-control:
   removable-media:
-  system-observe:
-  system-trace:
   wayland:
   x11:
 
