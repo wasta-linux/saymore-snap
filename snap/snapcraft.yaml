@@ -22,8 +22,8 @@ architectures:
 environment:
   SYSTEM_WGETRC: $SNAP/wine-runtime/etc/wgetrc
   TRICKS: "fontsmooth=rgb corefonts dotnet462"
-  WINEARCH: "win64"
-  # WINEARCH: "win32"
+  # WINEARCH: "win64"
+  WINEARCH: "win32"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
 
 apps:
@@ -34,8 +34,8 @@ apps:
     environment:
       INSTALL_EXE: "${SNAP}/data/SayMoreInstaller.3.5.1.msi"
       INSTALL_FLAGS: "/passive"
-      RUN_EXE: "C:/Program Files (x86)/SayMore/SayMore.exe"
-      # RUN_EXE: "C:/Program Files/SayMore/SayMore.exe"
+      # RUN_EXE: "C:/Program Files (x86)/SayMore/SayMore.exe"
+      RUN_EXE: "C:/Program Files/SayMore/SayMore.exe"
 
   init:
     # extensions: [gnome]
