@@ -6,10 +6,12 @@ export WINEDLLOVERRIDES=$(echo "$WINEDLLOVERRIDES" | sed -r 's/[,;]?mscoree[,;]?
 
 sm_dir="$(xdg-user-dir 'DOCUMENTS')/SayMore"
 if [[ $(find "$sm_dir" -name '*.sprj' | wc -l) -lt 2 ]]; then
+    # Extra space at the end works around unnecessarily tall window.
     text="You have not created a project other than the provided "test" project. \
 To work around a SayMore bug, please first open the test project in \'${sm_dir}/test\', \
 then you will be able to successfully create a new project. Otherwise you will get an \
-error when trying to add a session or a person to a new project."
+error when trying to add a session or a person to a new project. \
+                                                                                        "
     yad --title="Creating your first SayMore project" \
-        --text="$text" --width=400 --height=300 --center --on-top --button=gtk-ok:100 --borders=12
+        --text="$text" --width=400 --center --on-top --button=gtk-ok:100 --borders=12 # --height=300
 fi
