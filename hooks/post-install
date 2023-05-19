@@ -128,24 +128,24 @@ mkdir -p "$test_proj_dir"
 if [[ ! -f "${test_proj_dir}/${proj_name}.sprj" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <transcriptionFont />
-  <freeTranslationFont />
-  <AutoSegmentersettings minSegmentLength="0" maxSegmentLength="0" preferrerdPauseLength="0" optimumLengthClampingFactor="0" />
+  <transcriptionFont/>
+  <freeTranslationFont/>
+  <AutoSegmentersettings minSegmentLength="0" maxSegmentLength="0" preferrerdPauseLength="0" optimumLengthClampingFactor="0"/>
   <Title>test</Title>
-  <FundingProjectTitle />
-  <ProjectDescription />
-  <VernacularISO3CodeAndName />
-  <AnalysisISO3CodeAndName />
-  <Location />
-  <Region />
+  <FundingProjectTitle/>
+  <ProjectDescription/>
+  <VernacularISO3CodeAndName/>
+  <AnalysisISO3CodeAndName/>
+  <Location/>
+  <Region/>
   <Country>Unspecified</Country>
   <Continent>Unspecified</Continent>
-  <ContactPerson />
-  <AccessProtocol />
-  <DateAvailable />
-  <RightsHolder />
-  <Depositor />
-  <IMDIOutputDirectory />
+  <ContactPerson/>
+  <AccessProtocol/>
+  <DateAvailable/>
+  <RightsHolder/>
+  <Depositor/>
+  <IMDIOutputDirectory/>
 </Project>' > "${test_proj_dir}/${proj_name}.sprj"
 fi
 # Create test person.
@@ -164,8 +164,8 @@ if [[ ! -f "$session_file" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
 <Session version="2.0">
   <genre type="string">&lt;Unknown&gt;</genre>
-  <participants type="string"></participants>
-  <contributions type="xml" />
+  <participants type="string"/>
+  <contributions type="xml"/>
 </Session>' > "$session_file"
 fi
 
