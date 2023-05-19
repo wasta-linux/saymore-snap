@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Show relevant WINE and SayMore processes.
+
+ps -ewwo pid,pcpu,pmem,args | grep -e PID -e wineserver -e '\.exe' | grep -v grep

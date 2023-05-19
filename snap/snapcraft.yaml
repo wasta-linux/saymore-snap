@@ -47,7 +47,17 @@ apps:
   kill-saymore:
     # extensions: [gnome]
     extensions: [gnome-3-38]
-    command: usr/bin/pkill SayMore.exe
+    command: bin/kill-saymore
+
+  kill-procs:
+    # extensions: [gnome]
+    extensions: [gnome-3-38]
+    command: bin/kill-procs
+
+  list-procs:
+    # extensions: [gnome]
+    extensions: [gnome-3-38]
+    command: bin/list-procs
 
   reinstall-dotnet:
     # extensions: [gnome]
@@ -55,7 +65,7 @@ apps:
     command: bin/sommelier winetricks -f -q dotnet462
 
   remove-wine-prefix:
-      # extensions: [gnome]
+    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/sommelier winetricks annihilate
 
@@ -145,6 +155,14 @@ parts:
       "*": sommelier/hooks/
     stage:
       - sommelier
+
+  scripts:
+    plugin: dump
+    source: scripts/
+    organize:
+      "*": bin/
+    stage:
+      - bin
 
   sommelier-core:
     plugin: make
