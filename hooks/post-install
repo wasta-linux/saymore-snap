@@ -31,86 +31,57 @@ if [[ ! -f "$sm_settings" ]]; then
   echo -e "<?xml version=\"1.0\" encoding=\"utf-8\"?>
 <Settings>
   <FirstTimeRun>True</FirstTimeRun>
-  <SessionScreenComponentsSplitterPos>
-  </SessionScreenComponentsSplitterPos>
+  <SessionScreenComponentsSplitterPos>319</SessionScreenComponentsSplitterPos>
   <PersonContributionColumns>200,120,80,200</PersonContributionColumns>
   <AnnotationEditorVideoWindowYtoXRatio>0.75</AnnotationEditorVideoWindowYtoXRatio>
-  <PersonCustomFieldsGrid>
-  </PersonCustomFieldsGrid>
-  <ProjectWindow />
-  <UnknownFileFieldsGrid>
-  </UnknownFileFieldsGrid>
-  <SessionRecorderDlg />
-  <PersonScreenComponentsSplitterPos>
-  </PersonScreenComponentsSplitterPos>
-  <SessionScreenComponentGrid>
-  </SessionScreenComponentGrid>
-  <MediaFileMoreInfoDlg />
-  <PersonListGrid>
-  </PersonListGrid>
-  <SessionsListGrid>
-  </SessionsListGrid>
-  <ProjectOtherDocumentsComponentGrid>
-  </ProjectOtherDocumentsComponentGrid>
-  <DefaultSegmentationMethod>
-  </DefaultSegmentationMethod>
-  <NewSessionsFromFilesLastFolder>
-  </NewSessionsFromFilesLastFolder>
-  <FreeTranslationWsForFWInterlinearExport>
-  </FreeTranslationWsForFWInterlinearExport>
+  <PersonCustomFieldsGrid/>
+  <ProjectWindow/>
+  <UnknownFileFieldsGrid/>
+  <SessionRecorderDlg/>
+  <PersonScreenComponentsSplitterPos>319</PersonScreenComponentsSplitterPos>
+  <SessionScreenComponentGrid/>
+  <MediaFileMoreInfoDlg/>
+  <PersonListGrid/>
+  <SessionsListGrid/>
+  <ProjectOtherDocumentsComponentGrid/>
+  <DefaultSegmentationMethod/>
+  <NewSessionsFromFilesLastFolder/>
+  <FreeTranslationWsForFWInterlinearExport/>
   <UserInterfaceLanguage>en</UserInterfaceLanguage>
-  <NewSessionsFromFilesDlgComponentGrid>
-  </NewSessionsFromFilesDlgComponentGrid>
-  <PersonScreenComponentGrid>
-  </PersonScreenComponentGrid>
-  <ImageFileFieldsGrid>
-  </ImageFileFieldsGrid>
-  <AllowStatisticsChartLabelsToWrap>
-  </AllowStatisticsChartLabelsToWrap>
-  <VideoFileFieldsGrid>
-  </VideoFileFieldsGrid>
-  <SessionScreenElementsListSplitterPos>
-  </SessionScreenElementsListSplitterPos>
-  <DefaultFolderForNewProjects>
-  </DefaultFolderForNewProjects>
-  <ContributorsGrid>
-  </ContributorsGrid>
-  <SessionCustomFieldsGrid>
-  </SessionCustomFieldsGrid>
-  <LastFolderForComponentFileAdd>
-  </LastFolderForComponentFileAdd>
-  <ArchivingDialog />
-  <ShowFFmpegDetailsWhenConvertingMedia>
-  </ShowFFmpegDetailsWhenConvertingMedia>
+  <NewSessionsFromFilesDlgComponentGrid/>
+  <PersonScreenComponentGrid/>
+  <ImageFileFieldsGrid/>
+  <AllowStatisticsChartLabelsToWrap/>
+  <VideoFileFieldsGrid/>
+  <SessionScreenElementsListSplitterPos>578</SessionScreenElementsListSplitterPos>
+  <DefaultFolderForNewProjects/>
+  <ContributorsGrid/>
+  <SessionCustomFieldsGrid/>
+  <LastFolderForComponentFileAdd/>
+  <ArchivingDialog/>
+  <ShowFFmpegDetailsWhenConvertingMedia/>
   <ProgramToLaunchForIMDIPackage>Arbil\\\\arbil-stable.exe</ProgramToLaunchForIMDIPackage>
   <NeedUpgrade>False</NeedUpgrade>
   <MediaPlayerVolume>-1</MediaPlayerVolume>
-  <AnnotationEditorSpiltterPos>
-  </AnnotationEditorSpiltterPos>
-  <SegmentGrid>
-  </SegmentGrid>
-  <AudioFileFieldsGrid>
-  </AudioFileFieldsGrid>
-  <ManualSegmenterDlg />
+  <AnnotationEditorSpiltterPos/>
+  <SegmentGrid/>
+  <AudioFileFieldsGrid/>
+  <ManualSegmenterDlg/>
   <AnnotationEditorPlaybackSpeedIndex>0</AnnotationEditorPlaybackSpeedIndex>
-  <LocalizationDlgSettings>
-  </LocalizationDlgSettings>
-  <ConvertMediaDlg />
-  <TranscriptionWsForFWInterlinearExport>
-  </TranscriptionWsForFWInterlinearExport>
+  <LocalizationDlgSettings/>
+  <ConvertMediaDlg/>
+  <TranscriptionWsForFWInterlinearExport/>
   <TranslationPlaybackType>4</TranslationPlaybackType>
-  <NewSessionsFromFilesDlg />
+  <NewSessionsFromFilesDlg/>
   <ZoomPercentageInAnnotationRecordingDlg>100</ZoomPercentageInAnnotationRecordingDlg>
   <ZoomPercentageInManualSegmenterDlg>100</ZoomPercentageInManualSegmenterDlg>
-  <ProjectDescriptionDocumentsComponentGrid>
-  </ProjectDescriptionDocumentsComponentGrid>
-  <PersonScreenElementListSpiltterPos>
-  </PersonScreenElementListSpiltterPos>
-  <WelcomeDialog />
+  <ProjectDescriptionDocumentsComponentGrid/>
+  <PersonScreenElementListSpiltterPos>578</PersonScreenElementListSpiltterPos>
+  <WelcomeDialog/>
   <TranscriptionPlaybackType>1</TranscriptionPlaybackType>
-  <MPlayerDebuggingOutputWindow />
-  <OralAnnotationRecorderDlg />
-  <MRUList type=\"System.Collections.Specialized.StringCollection\" />
+  <MPlayerDebuggingOutputWindow/>
+  <OralAnnotationRecorderDlg/>
+  <MRUList type=\"System.Collections.Specialized.StringCollection\"/>
 </Settings>
 " > "$sm_settings"
 fi
