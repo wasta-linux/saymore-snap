@@ -1,5 +1,10 @@
 #!/bin/env bash
 
+# Kill SayMore b/c it starts as part of install in addition to run,
+#   which doesn't allow pre-start script to run. The launch script 
+#   will start it again, at the correct time.
+pkill SayMore.exe
+
 # Set Winver to 10.
 "$WINELOADER" winecfg /v win10
 
@@ -135,8 +140,8 @@ if [[ ! -f "$session_file" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
 <Session version="2.0">
   <genre type="string">&lt;Unknown&gt;</genre>
-  <participants type="string"/>
-  <contributions type="xml"/>
+  <participants type="string"></participants>
+  <contributions type="xml" />
 </Session>' > "$session_file"
 fi
 
@@ -179,7 +184,22 @@ if [[ -n "$APP_SHARE_DIR" ]]; then
 fi
 cp -f "${base}/data/langtags.json" "$sldrcache_dir"
 
-# Kill SayMore b/c it starts as part of install in addition to run,
-#   which doesn't allow pre-start script to run. The launch script 
-#   will start it again, at the correct time.
-pkill SayMore.exe
+# Add duplicate DLL.
+sm_dir="${WINEPREFIX}/drive_c/Program Files/SayMore"
+cp "${sm_dir}/System.Xml.XmlSerializer.dll" "${sm_dir}/System.XmlSerializers.dll"
+xmlstarlet edit -L \
+  -s "//configuration/runtime" -t elem -n "assemblyBinding" \
+  --var newAB '$prev' \
+  -s '$newAB' -t attr -n "xmlns" -v "urn:schemas-microsoft-com:asm.v1" \
+  -s '$newAB' -t elem -n "dependentAssembly" \
+  --var newDA '$prev' \
+  -s '$newDA' -t elem -n "assemblyIdentity" \
+  --var newAI '$prev' \
+  -s '$newAI' -t attr -n "name" -v "System.XmlSerializers" \
+  -s '$newAI' -t attr -n "publicKeyToken" -v "b03f5f7f11d50a3a" \
+  -s '$newAI' -t attr -n "culture" -v "neutral" \
+  -s '$newDA' -t elem -n "bindingRedirect" \
+  --var newBR '$prev' \
+  -s '$newBR' -t attr -n "oldVersion" -v "0.0.0.0-4.0.11.0" \
+  -s '$newBR' -t attr -n "newVersion" -v "4.0.11.0" \
+  "${sm_dir}/Saymore.exe.config"
