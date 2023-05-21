@@ -39,54 +39,54 @@ if [[ ! -f "$sm_settings" ]]; then
   <SessionScreenComponentsSplitterPos>319</SessionScreenComponentsSplitterPos>
   <PersonContributionColumns>200,120,80,200</PersonContributionColumns>
   <AnnotationEditorVideoWindowYtoXRatio>0.75</AnnotationEditorVideoWindowYtoXRatio>
-  <PersonCustomFieldsGrid/>
-  <ProjectWindow/>
-  <UnknownFileFieldsGrid/>
-  <SessionRecorderDlg/>
+  <PersonCustomFieldsGrid />
+  <ProjectWindow />
+  <UnknownFileFieldsGrid />
+  <SessionRecorderDlg />
   <PersonScreenComponentsSplitterPos>319</PersonScreenComponentsSplitterPos>
-  <SessionScreenComponentGrid/>
-  <MediaFileMoreInfoDlg/>
-  <PersonListGrid/>
-  <SessionsListGrid/>
-  <ProjectOtherDocumentsComponentGrid/>
-  <DefaultSegmentationMethod/>
-  <NewSessionsFromFilesLastFolder/>
-  <FreeTranslationWsForFWInterlinearExport/>
+  <SessionScreenComponentGrid />
+  <MediaFileMoreInfoDlg />
+  <PersonListGrid />
+  <SessionsListGrid />
+  <ProjectOtherDocumentsComponentGrid />
+  <DefaultSegmentationMethod />
+  <NewSessionsFromFilesLastFolder />
+  <FreeTranslationWsForFWInterlinearExport />
   <UserInterfaceLanguage>en</UserInterfaceLanguage>
-  <NewSessionsFromFilesDlgComponentGrid/>
-  <PersonScreenComponentGrid/>
-  <ImageFileFieldsGrid/>
-  <AllowStatisticsChartLabelsToWrap/>
-  <VideoFileFieldsGrid/>
+  <NewSessionsFromFilesDlgComponentGrid />
+  <PersonScreenComponentGrid />
+  <ImageFileFieldsGrid />
+  <AllowStatisticsChartLabelsToWrap />
+  <VideoFileFieldsGrid />
   <SessionScreenElementsListSplitterPos>578</SessionScreenElementsListSplitterPos>
-  <DefaultFolderForNewProjects/>
-  <ContributorsGrid/>
-  <SessionCustomFieldsGrid/>
-  <LastFolderForComponentFileAdd/>
-  <ArchivingDialog/>
-  <ShowFFmpegDetailsWhenConvertingMedia/>
+  <DefaultFolderForNewProjects />
+  <ContributorsGrid />
+  <SessionCustomFieldsGrid />
+  <LastFolderForComponentFileAdd />
+  <ArchivingDialog />
+  <ShowFFmpegDetailsWhenConvertingMedia />
   <ProgramToLaunchForIMDIPackage>Arbil\\\\arbil-stable.exe</ProgramToLaunchForIMDIPackage>
   <NeedUpgrade>False</NeedUpgrade>
   <MediaPlayerVolume>-1</MediaPlayerVolume>
-  <AnnotationEditorSpiltterPos/>
-  <SegmentGrid/>
-  <AudioFileFieldsGrid/>
-  <ManualSegmenterDlg/>
+  <AnnotationEditorSpiltterPos />
+  <SegmentGrid />
+  <AudioFileFieldsGrid />
+  <ManualSegmenterDlg />
   <AnnotationEditorPlaybackSpeedIndex>0</AnnotationEditorPlaybackSpeedIndex>
-  <LocalizationDlgSettings/>
-  <ConvertMediaDlg/>
-  <TranscriptionWsForFWInterlinearExport/>
+  <LocalizationDlgSettings />
+  <ConvertMediaDlg />
+  <TranscriptionWsForFWInterlinearExport />
   <TranslationPlaybackType>4</TranslationPlaybackType>
-  <NewSessionsFromFilesDlg/>
+  <NewSessionsFromFilesDlg />
   <ZoomPercentageInAnnotationRecordingDlg>100</ZoomPercentageInAnnotationRecordingDlg>
   <ZoomPercentageInManualSegmenterDlg>100</ZoomPercentageInManualSegmenterDlg>
-  <ProjectDescriptionDocumentsComponentGrid/>
+  <ProjectDescriptionDocumentsComponentGrid />
   <PersonScreenElementListSpiltterPos>578</PersonScreenElementListSpiltterPos>
-  <WelcomeDialog/>
+  <WelcomeDialog />
   <TranscriptionPlaybackType>1</TranscriptionPlaybackType>
-  <MPlayerDebuggingOutputWindow/>
-  <OralAnnotationRecorderDlg/>
-  <MRUList type=\"System.Collections.Specialized.StringCollection\"/>
+  <MPlayerDebuggingOutputWindow />
+  <OralAnnotationRecorderDlg />
+  <MRUList type=\"System.Collections.Specialized.StringCollection\" />
 </Settings>
 " > "$sm_settings"
 fi
@@ -104,24 +104,24 @@ mkdir -p "$test_proj_dir"
 if [[ ! -f "${test_proj_dir}/${proj_name}.sprj" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <transcriptionFont/>
-  <freeTranslationFont/>
-  <AutoSegmentersettings minSegmentLength="0" maxSegmentLength="0" preferrerdPauseLength="0" optimumLengthClampingFactor="0"/>
+  <transcriptionFont />
+  <freeTranslationFont />
+  <AutoSegmentersettings minSegmentLength="0" maxSegmentLength="0" preferrerdPauseLength="0" optimumLengthClampingFactor="0" />
   <Title>test</Title>
-  <FundingProjectTitle/>
-  <ProjectDescription/>
-  <VernacularISO3CodeAndName/>
-  <AnalysisISO3CodeAndName/>
-  <Location/>
-  <Region/>
+  <FundingProjectTitle />
+  <ProjectDescription />
+  <VernacularISO3CodeAndName />
+  <AnalysisISO3CodeAndName />
+  <Location />
+  <Region />
   <Country>Unspecified</Country>
   <Continent>Unspecified</Continent>
-  <ContactPerson/>
-  <AccessProtocol/>
-  <DateAvailable/>
-  <RightsHolder/>
-  <Depositor/>
-  <IMDIOutputDirectory/>
+  <ContactPerson />
+  <AccessProtocol />
+  <DateAvailable />
+  <RightsHolder />
+  <Depositor />
+  <IMDIOutputDirectory />
 </Project>' > "${test_proj_dir}/${proj_name}.sprj"
 fi
 # Create test person.
