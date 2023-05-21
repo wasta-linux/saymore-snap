@@ -202,23 +202,3 @@ if [[ -n "$APP_SHARE_DIR" ]]; then
   base="$APP_SHARE_DIR"
 fi
 cp -f "${base}/data/langtags.json" "$sldrcache_dir"
-
-# Add duplicate DLL.
-sm_dir="${WINEPREFIX}/drive_c/Program Files/SayMore"
-cp "${sm_dir}/System.Xml.XmlSerializer.dll" "${sm_dir}/System.XmlSerializers.dll"
-xmlstarlet edit -LPS \
-  -s "//configuration/runtime" -t elem -n "assemblyBinding" \
-  --var newAB '$prev' \
-  -s '$newAB' -t attr -n "xmlns" -v "urn:schemas-microsoft-com:asm.v1" \
-  -s '$newAB' -t elem -n "dependentAssembly" \
-  --var newDA '$prev' \
-  -s '$newDA' -t elem -n "assemblyIdentity" \
-  --var newAI '$prev' \
-  -s '$newAI' -t attr -n "name" -v "System.XmlSerializers" \
-  -s '$newAI' -t attr -n "publicKeyToken" -v "b03f5f7f11d50a3a" \
-  -s '$newAI' -t attr -n "culture" -v "neutral" \
-  -s '$newDA' -t elem -n "bindingRedirect" \
-  --var newBR '$prev' \
-  -s '$newBR' -t attr -n "oldVersion" -v "0.0.0.0-4.0.11.0" \
-  -s '$newBR' -t attr -n "newVersion" -v "4.0.11.0" \
-  "${sm_dir}/Saymore.exe.config"
