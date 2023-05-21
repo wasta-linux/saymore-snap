@@ -41,46 +41,65 @@ if [[ ! -f "$sm_settings" ]]; then
   <AnnotationEditorVideoWindowYtoXRatio>0.75</AnnotationEditorVideoWindowYtoXRatio>
   <PersonCustomFieldsGrid />
   <ProjectWindow />
-  <UnknownFileFieldsGrid />
+  <UnknownFileFieldsGrid>
+  </UnknownFileFieldsGrid>
   <SessionRecorderDlg />
   <PersonScreenComponentsSplitterPos>319</PersonScreenComponentsSplitterPos>
   <SessionScreenComponentGrid />
   <MediaFileMoreInfoDlg />
   <PersonListGrid />
   <SessionsListGrid />
-  <ProjectOtherDocumentsComponentGrid />
-  <DefaultSegmentationMethod />
-  <NewSessionsFromFilesLastFolder />
-  <FreeTranslationWsForFWInterlinearExport />
+  <ProjectOtherDocumentsComponentGrid>
+  </ProjectOtherDocumentsComponentGrid>
+  <DefaultSegmentationMethod>
+  </DefaultSegmentationMethod>
+  <NewSessionsFromFilesLastFolder>
+  </NewSessionsFromFilesLastFolder>
+  <FreeTranslationWsForFWInterlinearExport>
+  </FreeTranslationWsForFWInterlinearExport>
   <UserInterfaceLanguage>en</UserInterfaceLanguage>
-  <NewSessionsFromFilesDlgComponentGrid />
+  <NewSessionsFromFilesDlgComponentGrid>
+  </NewSessionsFromFilesDlgComponentGrid>
   <PersonScreenComponentGrid />
-  <ImageFileFieldsGrid />
-  <AllowStatisticsChartLabelsToWrap />
-  <VideoFileFieldsGrid />
+  <ImageFileFieldsGrid>
+  </ImageFileFieldsGrid>
+  <AllowStatisticsChartLabelsToWrap>
+  </AllowStatisticsChartLabelsToWrap>
+  <VideoFileFieldsGrid>
+  </VideoFileFieldsGrid>
   <SessionScreenElementsListSplitterPos>578</SessionScreenElementsListSplitterPos>
-  <DefaultFolderForNewProjects />
-  <ContributorsGrid />
+  <DefaultFolderForNewProjects>
+  </DefaultFolderForNewProjects>
+  <ContributorsGrid>
+  </ContributorsGrid>
   <SessionCustomFieldsGrid />
-  <LastFolderForComponentFileAdd />
+  <LastFolderForComponentFileAdd>
+  </LastFolderForComponentFileAdd>
   <ArchivingDialog />
-  <ShowFFmpegDetailsWhenConvertingMedia />
+  <ShowFFmpegDetailsWhenConvertingMedia>
+  </ShowFFmpegDetailsWhenConvertingMedia>
   <ProgramToLaunchForIMDIPackage>Arbil\\\\arbil-stable.exe</ProgramToLaunchForIMDIPackage>
   <NeedUpgrade>False</NeedUpgrade>
   <MediaPlayerVolume>-1</MediaPlayerVolume>
-  <AnnotationEditorSpiltterPos />
-  <SegmentGrid />
-  <AudioFileFieldsGrid />
+  <AnnotationEditorSpiltterPos>
+  </AnnotationEditorSpiltterPos>
+  <SegmentGrid>
+  </SegmentGrid>
+  <AudioFileFieldsGrid>
+  </AudioFileFieldsGrid>
   <ManualSegmenterDlg />
   <AnnotationEditorPlaybackSpeedIndex>0</AnnotationEditorPlaybackSpeedIndex>
-  <LocalizationDlgSettings />
+  <LocalizationDlgSettings>
+  </LocalizationDlgSettings>
   <ConvertMediaDlg />
-  <TranscriptionWsForFWInterlinearExport />
+  <TranscriptionWsForFWInterlinearExport>
+  </TranscriptionWsForFWInterlinearExport>
   <TranslationPlaybackType>4</TranslationPlaybackType>
   <NewSessionsFromFilesDlg />
   <ZoomPercentageInAnnotationRecordingDlg>100</ZoomPercentageInAnnotationRecordingDlg>
   <ZoomPercentageInManualSegmenterDlg>100</ZoomPercentageInManualSegmenterDlg>
-  <ProjectDescriptionDocumentsComponentGrid />
+  <ProjectDescriptionDocumentsComponentGrid>
+  </ProjectDescriptionDocumentsComponentGrid>
   <PersonScreenElementListSpiltterPos>578</PersonScreenElementListSpiltterPos>
   <WelcomeDialog />
   <TranscriptionPlaybackType>1</TranscriptionPlaybackType>
@@ -94,7 +113,7 @@ fi
 # Set language to system language.
 lang=${LANG%%_*}
 if [[ "$(xmlstarlet select -t -v "//Settings/UserInterfaceLanguage" "$sm_settings")" != "$lang" ]]; then
-    xmlstarlet edit -L -u "//Settings/UserInterfaceLanguage" -v "$lang" "$sm_settings"
+    xmlstarlet edit -LPS -u "//Settings/UserInterfaceLanguage" -v "$lang" "$sm_settings"
 fi 
 
 # Create initial "test" project to workaround fatal new-session and new-person errors.
@@ -148,15 +167,15 @@ fi
 # Force SayMore to open "test" project on 1st run.
 test_proj_path="C:\\users\\${USER}\\Documents\\SayMore\\test\\test.sprj"
 if [[ -z "$(xmlstarlet select -t -v "//Settings/MRUList/MRUList0" "$sm_settings")" ]]; then
-  xmlstarlet edit -L -s "//Settings/MRUList" -t elem -n "MRUList0" -v "$test_proj_path" "$sm_settings"
+  xmlstarlet edit -LPS -s "//Settings/MRUList" -t elem -n "MRUList0" -v "$test_proj_path" "$sm_settings"
 fi
 # # Set FirstTimeRun to False.
 # if [[ "$(xmlstarlet select -t -v "//Settings/FirstTimeRun" "$sm_settings")" == 'True' ]]; then
-#   xmlstarlet edit -L -u "//Settings/FirstTimeRun" -v "False" "$sm_settings"
+#   xmlstarlet edit -LPS -u "//Settings/FirstTimeRun" -v "False" "$sm_settings"
 # fi
 # Set WelcomeDialog values.
 if [[ -z "$(xmlstarlet select -t -v "//Settings/WelcomeDialog/windowSettings/state" "$sm_settings")" ]]; then
-  xmlstarlet edit -L \
+  xmlstarlet edit -LPS \
     -s "//Settings/WelcomeDialog" -t attr -n "type" -v "SIL.Windows.Forms.PortableSettingsProvider.FormSettings" \
     -s "//Settings/WelcomeDialog" -t elem -n "windowSettings" \
     -s "//Settings/WelcomeDialog/windowSettings" -t elem -n "state" -v "Normal" \
@@ -166,7 +185,7 @@ if [[ -z "$(xmlstarlet select -t -v "//Settings/WelcomeDialog/windowSettings/sta
 fi
 # Set ProjectWindow values.
 if [[ -z "$(xmlstarlet select -t -v "//Settings/ProjectWindow/windowSettings/state" "$sm_settings")" ]]; then
-  xmlstarlet edit -L \
+  xmlstarlet edit -LPS \
     -s "//Settings/ProjectWindow" -t attr -n "type" -v "SIL.Windows.Forms.PortableSettingsProvider.FormSettings" \
     -s "//Settings/ProjectWindow" -t elem -n "windowSettings" \
     -s "//Settings/ProjectWindow/windowSettings" -t elem -n "state" -v "Maximized" \
@@ -187,7 +206,7 @@ cp -f "${base}/data/langtags.json" "$sldrcache_dir"
 # Add duplicate DLL.
 sm_dir="${WINEPREFIX}/drive_c/Program Files/SayMore"
 cp "${sm_dir}/System.Xml.XmlSerializer.dll" "${sm_dir}/System.XmlSerializers.dll"
-xmlstarlet edit -L \
+xmlstarlet edit -LPS \
   -s "//configuration/runtime" -t elem -n "assemblyBinding" \
   --var newAB '$prev' \
   -s '$newAB' -t attr -n "xmlns" -v "urn:schemas-microsoft-com:asm.v1" \
