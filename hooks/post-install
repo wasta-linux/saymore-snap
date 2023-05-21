@@ -113,7 +113,7 @@ fi
 # Set language to system language.
 lang=${LANG%%_*}
 if [[ "$(xmlstarlet select -t -v "//Settings/UserInterfaceLanguage" "$sm_settings")" != "$lang" ]]; then
-    xmlstarlet edit -LPS -u "//Settings/UserInterfaceLanguage" -v "$lang" "$sm_settings"
+    xmlstarlet edit -L -P -S -u "//Settings/UserInterfaceLanguage" -v "$lang" "$sm_settings"
 fi 
 
 # Create initial "test" project to workaround fatal new-session and new-person errors.
@@ -167,15 +167,15 @@ fi
 # Force SayMore to open "test" project on 1st run.
 test_proj_path="C:\\users\\${USER}\\Documents\\SayMore\\test\\test.sprj"
 if [[ -z "$(xmlstarlet select -t -v "//Settings/MRUList/MRUList0" "$sm_settings")" ]]; then
-  xmlstarlet edit -LPS -s "//Settings/MRUList" -t elem -n "MRUList0" -v "$test_proj_path" "$sm_settings"
+  xmlstarlet edit -L -P -S -s "//Settings/MRUList" -t elem -n "MRUList0" -v "$test_proj_path" "$sm_settings"
 fi
 # # Set FirstTimeRun to False.
 # if [[ "$(xmlstarlet select -t -v "//Settings/FirstTimeRun" "$sm_settings")" == 'True' ]]; then
-#   xmlstarlet edit -LPS -u "//Settings/FirstTimeRun" -v "False" "$sm_settings"
+#   xmlstarlet edit -L -P -S -u "//Settings/FirstTimeRun" -v "False" "$sm_settings"
 # fi
 # Set WelcomeDialog values.
 if [[ -z "$(xmlstarlet select -t -v "//Settings/WelcomeDialog/windowSettings/state" "$sm_settings")" ]]; then
-  xmlstarlet edit -LPS \
+  xmlstarlet edit -L -P -S \
     -s "//Settings/WelcomeDialog" -t attr -n "type" -v "SIL.Windows.Forms.PortableSettingsProvider.FormSettings" \
     -s "//Settings/WelcomeDialog" -t elem -n "windowSettings" \
     -s "//Settings/WelcomeDialog/windowSettings" -t elem -n "state" -v "Normal" \
@@ -185,7 +185,7 @@ if [[ -z "$(xmlstarlet select -t -v "//Settings/WelcomeDialog/windowSettings/sta
 fi
 # Set ProjectWindow values.
 if [[ -z "$(xmlstarlet select -t -v "//Settings/ProjectWindow/windowSettings/state" "$sm_settings")" ]]; then
-  xmlstarlet edit -LPS \
+  xmlstarlet edit -L -P -S \
     -s "//Settings/ProjectWindow" -t attr -n "type" -v "SIL.Windows.Forms.PortableSettingsProvider.FormSettings" \
     -s "//Settings/ProjectWindow" -t elem -n "windowSettings" \
     -s "//Settings/ProjectWindow/windowSettings" -t elem -n "state" -v "Maximized" \
