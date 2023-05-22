@@ -58,6 +58,11 @@ apps:
     # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/list-procs
+  
+  watch-procs:
+    # extensions: [gnome]
+    extensions: [gnome-3-38]
+    command: bin/watch-procs
 
   reinstall-dotnet:
     # extensions: [gnome]
@@ -132,6 +137,7 @@ parts:
       - usr/bin/pgrep
       - usr/bin/pkill
       - usr/bin/xmlstarlet
+      - usr/bin/watch
 
   # This reverts changes from https://github.com/snapcore/snapcraft/pull/3586
   fix-fontconfig:
