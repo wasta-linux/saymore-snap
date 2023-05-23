@@ -1,0 +1,45 @@
+#!/bin/env bash
+
+### Completely remove SayMore and vestigial files.
+
+echo "This doesn't work"
+exit 1
+
+scripts_dir="$(dirname "$(realpath "$0")")"
+hooks_dir="$(dirname "$scripts_dir")/hooks"
+if [[ ! -d "$hooks_dir" ]]; then
+    echo "Error: hooks dir not found."
+    exit 1
+fi
+source "${hooks_dir}/setup"
+if [[ -z "$WINEPREFIX" ]]; then
+    echo "Error: WINEPREFIX is not set."
+    exit 1
+fi
+
+# Remove install folders & files.
+find "$WINEPREFIX" -iname 'SayMore*' -type d -exec rm -rf {} \; 2>/dev/null
+find "$WINEPREFIX" -iname 'SayMore*' -type f -exec rm -f {} \;
+rm -f "${HOME}/.local/share/applications/wine/Programs/SayMore/SayMore.desktop"
+rm -f "${WINEPREFIX}/drive_c/ProgramData/SIL/SldrCache/langtags.json"
+
+# Remove registry entries.
+"$WINELOADER" regedit -d "HKEY_CURRENT_USER\\SOFTWARE\\SayMore\\Components\\SayMore.exe"
+"$WINELOADER" regedit -d "HKEY_LOCAL_MACHINE\\Software\\Classes\\Installer\\Products\\2CB85C52FD7DFED43A637B4B010E5E2D"
+"$WINELOADER" regedit -d "HKEY_LOCAL_MACHINE\\Software\\Classes\\SayMore.sprjfile"
+components=(
+    "01C228A811CA1D04C8E23AB32763CC1D"
+    "28939437A86C10F439CBF5293B08FC98"
+    "28F1D343C1309F248B3764BFD50B88CA"
+    "299CCD9B4FE682541AA00F9BFB31FF43"
+    "2BA6143D28154A34E903B9A554788994"
+    "57BABCA10365A0E41B1350F87476C490"
+    "73C51102B19B885409D6B4F400E09A31"
+    "9A40A5AB03336E94F807039F213C10B4"
+    "C19E43AC353FCE642B0B3DA6E4571CE9"
+)
+set -x
+for c in "${components[@]}"; do
+    "$WINELOADER" regedit -d "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Installer\\UserData\\S-1-5-18\\Components\\$c"
+done
+"$WINELOADER" regedit -d "HKEY_CURRENT_USER\\Software\\SayMore"
