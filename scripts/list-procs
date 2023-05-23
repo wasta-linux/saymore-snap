@@ -2,4 +2,10 @@
 
 # Show relevant WINE and SayMore processes.
 
-ps -ewwo pid,pcpu,pmem,args | grep -e PID -e wineserver -e '\.exe' | grep -v grep
+proc_list=$(ps -ewwo pid,pcpu,pmem,args | grep -e PID -e wine -e '\.exe' | grep -v grep)
+if [[ $(echo "$proc_list" | wc -l) -lt 2 ]]; then
+    # Exit without printing the headers.
+    exit 0
+else
+    echo "$proc_list"
+fi
