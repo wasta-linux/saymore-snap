@@ -35,80 +35,89 @@ sm_settings="${WINEPREFIX}/drive_c/users/nate/AppData/Local/SayMore/SayMore.sett
 if [[ ! -f "$sm_settings" ]]; then
   echo -e "<?xml version=\"1.0\" encoding=\"utf-8\"?>
 <Settings>
-  <FirstTimeRun>True</FirstTimeRun>
-  <SessionScreenComponentsSplitterPos>319</SessionScreenComponentsSplitterPos>
-  <PersonContributionColumns>200,120,80,200</PersonContributionColumns>
-  <AnnotationEditorVideoWindowYtoXRatio>0.75</AnnotationEditorVideoWindowYtoXRatio>
-  <PersonCustomFieldsGrid />
   <ProjectWindow />
-  <UnknownFileFieldsGrid>
-  </UnknownFileFieldsGrid>
-  <SessionRecorderDlg />
-  <PersonScreenComponentsSplitterPos>319</PersonScreenComponentsSplitterPos>
-  <SessionScreenComponentGrid />
-  <MediaFileMoreInfoDlg />
-  <PersonListGrid />
-  <SessionsListGrid />
-  <ProjectOtherDocumentsComponentGrid>
-  </ProjectOtherDocumentsComponentGrid>
-  <DefaultSegmentationMethod>
-  </DefaultSegmentationMethod>
-  <NewSessionsFromFilesLastFolder>
-  </NewSessionsFromFilesLastFolder>
-  <FreeTranslationWsForFWInterlinearExport>
-  </FreeTranslationWsForFWInterlinearExport>
   <UserInterfaceLanguage>en</UserInterfaceLanguage>
-  <NewSessionsFromFilesDlgComponentGrid>
-  </NewSessionsFromFilesDlgComponentGrid>
-  <PersonScreenComponentGrid />
-  <ImageFileFieldsGrid>
-  </ImageFileFieldsGrid>
-  <AllowStatisticsChartLabelsToWrap>
-  </AllowStatisticsChartLabelsToWrap>
-  <VideoFileFieldsGrid>
-  </VideoFileFieldsGrid>
-  <SessionScreenElementsListSplitterPos>578</SessionScreenElementsListSplitterPos>
-  <DefaultFolderForNewProjects>
-  </DefaultFolderForNewProjects>
-  <ContributorsGrid>
-  </ContributorsGrid>
-  <SessionCustomFieldsGrid />
-  <LastFolderForComponentFileAdd>
-  </LastFolderForComponentFileAdd>
-  <ArchivingDialog />
-  <ShowFFmpegDetailsWhenConvertingMedia>
-  </ShowFFmpegDetailsWhenConvertingMedia>
-  <ProgramToLaunchForIMDIPackage>Arbil\\\\arbil-stable.exe</ProgramToLaunchForIMDIPackage>
-  <NeedUpgrade>False</NeedUpgrade>
-  <MediaPlayerVolume>-1</MediaPlayerVolume>
-  <AnnotationEditorSpiltterPos>
-  </AnnotationEditorSpiltterPos>
-  <SegmentGrid>
-  </SegmentGrid>
-  <AudioFileFieldsGrid>
-  </AudioFileFieldsGrid>
-  <ManualSegmenterDlg />
-  <AnnotationEditorPlaybackSpeedIndex>0</AnnotationEditorPlaybackSpeedIndex>
-  <LocalizationDlgSettings>
-  </LocalizationDlgSettings>
-  <ConvertMediaDlg />
-  <TranscriptionWsForFWInterlinearExport>
-  </TranscriptionWsForFWInterlinearExport>
-  <TranslationPlaybackType>4</TranslationPlaybackType>
-  <NewSessionsFromFilesDlg />
-  <ZoomPercentageInAnnotationRecordingDlg>100</ZoomPercentageInAnnotationRecordingDlg>
-  <ZoomPercentageInManualSegmenterDlg>100</ZoomPercentageInManualSegmenterDlg>
-  <ProjectDescriptionDocumentsComponentGrid>
-  </ProjectDescriptionDocumentsComponentGrid>
-  <PersonScreenElementListSpiltterPos>578</PersonScreenElementListSpiltterPos>
   <WelcomeDialog />
-  <TranscriptionPlaybackType>1</TranscriptionPlaybackType>
-  <MPlayerDebuggingOutputWindow />
-  <OralAnnotationRecorderDlg />
   <MRUList type=\"System.Collections.Specialized.StringCollection\" />
-</Settings>
-" > "$sm_settings"
+</Settings>" > "$sm_settings"
 fi
+# if [[ ! -f "$sm_settings" ]]; then
+#   echo -e "<?xml version=\"1.0\" encoding=\"utf-8\"?>
+# <Settings>
+#   <FirstTimeRun>True</FirstTimeRun>
+#   <SessionScreenComponentsSplitterPos>319</SessionScreenComponentsSplitterPos>
+#   <PersonContributionColumns>200,120,80,200</PersonContributionColumns>
+#   <AnnotationEditorVideoWindowYtoXRatio>0.75</AnnotationEditorVideoWindowYtoXRatio>
+#   <PersonCustomFieldsGrid />
+#   <ProjectWindow />
+#   <UnknownFileFieldsGrid>
+#   </UnknownFileFieldsGrid>
+#   <SessionRecorderDlg />
+#   <PersonScreenComponentsSplitterPos>319</PersonScreenComponentsSplitterPos>
+#   <SessionScreenComponentGrid />
+#   <MediaFileMoreInfoDlg />
+#   <PersonListGrid />
+#   <SessionsListGrid />
+#   <ProjectOtherDocumentsComponentGrid>
+#   </ProjectOtherDocumentsComponentGrid>
+#   <DefaultSegmentationMethod>
+#   </DefaultSegmentationMethod>
+#   <NewSessionsFromFilesLastFolder>
+#   </NewSessionsFromFilesLastFolder>
+#   <FreeTranslationWsForFWInterlinearExport>
+#   </FreeTranslationWsForFWInterlinearExport>
+#   <UserInterfaceLanguage>en</UserInterfaceLanguage>
+#   <NewSessionsFromFilesDlgComponentGrid>
+#   </NewSessionsFromFilesDlgComponentGrid>
+#   <PersonScreenComponentGrid />
+#   <ImageFileFieldsGrid>
+#   </ImageFileFieldsGrid>
+#   <AllowStatisticsChartLabelsToWrap>
+#   </AllowStatisticsChartLabelsToWrap>
+#   <VideoFileFieldsGrid>
+#   </VideoFileFieldsGrid>
+#   <SessionScreenElementsListSplitterPos>578</SessionScreenElementsListSplitterPos>
+#   <DefaultFolderForNewProjects>
+#   </DefaultFolderForNewProjects>
+#   <ContributorsGrid>
+#   </ContributorsGrid>
+#   <SessionCustomFieldsGrid />
+#   <LastFolderForComponentFileAdd>
+#   </LastFolderForComponentFileAdd>
+#   <ArchivingDialog />
+#   <ShowFFmpegDetailsWhenConvertingMedia>
+#   </ShowFFmpegDetailsWhenConvertingMedia>
+#   <ProgramToLaunchForIMDIPackage>Arbil\\\\arbil-stable.exe</ProgramToLaunchForIMDIPackage>
+#   <NeedUpgrade>False</NeedUpgrade>
+#   <MediaPlayerVolume>-1</MediaPlayerVolume>
+#   <AnnotationEditorSpiltterPos>
+#   </AnnotationEditorSpiltterPos>
+#   <SegmentGrid>
+#   </SegmentGrid>
+#   <AudioFileFieldsGrid>
+#   </AudioFileFieldsGrid>
+#   <ManualSegmenterDlg />
+#   <AnnotationEditorPlaybackSpeedIndex>0</AnnotationEditorPlaybackSpeedIndex>
+#   <LocalizationDlgSettings>
+#   </LocalizationDlgSettings>
+#   <ConvertMediaDlg />
+#   <TranscriptionWsForFWInterlinearExport>
+#   </TranscriptionWsForFWInterlinearExport>
+#   <TranslationPlaybackType>4</TranslationPlaybackType>
+#   <NewSessionsFromFilesDlg />
+#   <ZoomPercentageInAnnotationRecordingDlg>100</ZoomPercentageInAnnotationRecordingDlg>
+#   <ZoomPercentageInManualSegmenterDlg>100</ZoomPercentageInManualSegmenterDlg>
+#   <ProjectDescriptionDocumentsComponentGrid>
+#   </ProjectDescriptionDocumentsComponentGrid>
+#   <PersonScreenElementListSpiltterPos>578</PersonScreenElementListSpiltterPos>
+#   <WelcomeDialog />
+#   <TranscriptionPlaybackType>1</TranscriptionPlaybackType>
+#   <MPlayerDebuggingOutputWindow />
+#   <OralAnnotationRecorderDlg />
+#   <MRUList type=\"System.Collections.Specialized.StringCollection\" />
+# </Settings>
+# " > "$sm_settings"
+# fi
 
 # Set language to system language.
 lang=${LANG%%_*}
@@ -122,57 +131,65 @@ test_proj_dir="${WINEPREFIX}/drive_c/users/${USER}/Documents/SayMore/${proj_name
 mkdir -p "$test_proj_dir"
 if [[ ! -f "${test_proj_dir}/${proj_name}.sprj" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
-<Project>
-  <transcriptionFont />
-  <freeTranslationFont />
-  <AutoSegmentersettings minSegmentLength="0" maxSegmentLength="0" preferrerdPauseLength="0" optimumLengthClampingFactor="0" />
-  <Title>test</Title>
-  <FundingProjectTitle />
-  <ProjectDescription />
-  <VernacularISO3CodeAndName />
-  <AnalysisISO3CodeAndName />
-  <Location />
-  <Region />
-  <Country>Unspecified</Country>
-  <Continent>Unspecified</Continent>
-  <ContactPerson />
-  <AccessProtocol />
-  <DateAvailable />
-  <RightsHolder />
-  <Depositor />
-  <IMDIOutputDirectory />
-</Project>' > "${test_proj_dir}/${proj_name}.sprj"
+<Project />' > "${test_proj_dir}/${proj_name}.sprj"
 fi
+# if [[ ! -f "${test_proj_dir}/${proj_name}.sprj" ]]; then
+#     echo '<?xml version="1.0" encoding="utf-8"?>
+# <Project>
+#   <transcriptionFont />
+#   <freeTranslationFont />
+#   <AutoSegmentersettings minSegmentLength="0" maxSegmentLength="0" preferrerdPauseLength="0" optimumLengthClampingFactor="0" />
+#   <Title>test</Title>
+#   <FundingProjectTitle />
+#   <ProjectDescription />
+#   <VernacularISO3CodeAndName />
+#   <AnalysisISO3CodeAndName />
+#   <Location />
+#   <Region />
+#   <Country>Unspecified</Country>
+#   <Continent>Unspecified</Continent>
+#   <ContactPerson />
+#   <AccessProtocol />
+#   <DateAvailable />
+#   <RightsHolder />
+#   <Depositor />
+#   <IMDIOutputDirectory />
+# </Project>' > "${test_proj_dir}/${proj_name}.sprj"
+# fi
 # Create test person.
 mkdir -p "${test_proj_dir}/People/New Person"
 person_file="${test_proj_dir}/People/New Person/New Person.person"
 if [[ ! -f "$person_file" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
-<Person>
-  <privacyProtection type="string">false</privacyProtection>
-</Person>' > "$person_file"
+<Person />' > "$person_file"
 fi
+# if [[ ! -f "$person_file" ]]; then
+#     echo '<?xml version="1.0" encoding="utf-8"?>
+# <Person>
+#   <privacyProtection type="string">false</privacyProtection>
+# </Person>' > "$person_file"
+# fi
 # Create test session.
 mkdir -p "${test_proj_dir}/Sessions/New Session"
 session_file="${test_proj_dir}/Sessions/New Session/New Session.session"
 if [[ ! -f "$session_file" ]]; then
     echo '<?xml version="1.0" encoding="utf-8"?>
-<Session version="2.0">
-  <genre type="string">&lt;Unknown&gt;</genre>
-  <participants type="string"></participants>
-  <contributions type="xml" />
-</Session>' > "$session_file"
+<Session version="2.0" />' > "$session_file"
 fi
+# if [[ ! -f "$session_file" ]]; then
+#     echo '<?xml version="1.0" encoding="utf-8"?>
+# <Session version="2.0">
+#   <genre type="string">&lt;Unknown&gt;</genre>
+#   <participants type="string"></participants>
+#   <contributions type="xml" />
+# </Session>' > "$session_file"
+# fi
 
 # Force SayMore to open "test" project on 1st run.
 test_proj_path="C:\\users\\${USER}\\Documents\\SayMore\\test\\test.sprj"
 if [[ -z "$(xmlstarlet select -t -v "//Settings/MRUList/MRUList0" "$sm_settings")" ]]; then
   xmlstarlet edit -L -P -S -s "//Settings/MRUList" -t elem -n "MRUList0" -v "$test_proj_path" "$sm_settings"
 fi
-# # Set FirstTimeRun to False.
-# if [[ "$(xmlstarlet select -t -v "//Settings/FirstTimeRun" "$sm_settings")" == 'True' ]]; then
-#   xmlstarlet edit -L -P -S -u "//Settings/FirstTimeRun" -v "False" "$sm_settings"
-# fi
 # Set WelcomeDialog values.
 if [[ -z "$(xmlstarlet select -t -v "//Settings/WelcomeDialog/windowSettings/state" "$sm_settings")" ]]; then
   xmlstarlet edit -L -P -S \
