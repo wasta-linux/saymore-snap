@@ -20,6 +20,7 @@ architectures:
   - amd64
 
 environment:
+  SOMMELIER_NO_THEME: "true" # avoid crash b/c of Light theme
   SYSTEM_WGETRC: $SNAP/wine-runtime/etc/wgetrc
   TRICKS: "fontsmooth=rgb corefonts dotnet462" # dotnet40 dotnet45 dotnet46 dotnet461 explicitly install all .NETs
   # WINEARCH: "win64"

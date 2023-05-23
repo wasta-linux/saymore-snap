@@ -194,7 +194,7 @@ if [[ -z "$(xmlstarlet select -t -v "//Settings/ProjectWindow/windowSettings/sta
     "$sm_settings"
 fi
 
-# Copy in langtags.json.
+# Copy in langtags.json with correct permissions.
 sldrcache_dir="${WINEPREFIX}/drive_c/ProgramData/SIL/SldrCache"
 mkdir -p "$sldrcache_dir"
 base="$SNAP"
@@ -202,3 +202,4 @@ if [[ -n "$APP_SHARE_DIR" ]]; then
   base="$APP_SHARE_DIR"
 fi
 cp -f "${base}/data/langtags.json" "$sldrcache_dir"
+chmod 664 "${sldrcache_dir}/langtags.json"
