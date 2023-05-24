@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=SayMore
-Comment=Language documentation (via WINE)
+Comment=Language documentation (snap via WINE)
 Exec=saymore-unofficial
 Icon=${SNAP}/meta/gui/saymore-unofficial.png
 Terminal=false
