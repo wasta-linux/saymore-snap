@@ -16,7 +16,7 @@ description: |
   That’s why we built SayMore – to make common Language Documentation tasks fun and keep you productive.
 confinement: strict
 license: MIT
-contact: https://github.com/wasta-linux/saymore-snap/issues
+contact: https://github.com/wasta-linux/saymore-snap
 issues: https://github.com/wasta-linux/saymore-snap/issues
 icon: snap/gui/saymore-unofficial.png
 architectures:
