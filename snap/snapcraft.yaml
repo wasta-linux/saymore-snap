@@ -7,6 +7,9 @@ version: '3.5.1' # matches installer version below
 grade: stable
 summary: Make common Language Documentation tasks fun and keep you productive.
 description: |
+  NOTE: Due to the way this app uses .NET it is incompatible with snap confinement policy.
+  Until a solution is found the snap needs to be installed with the '--devmode' flag to work properly.
+
   Recording speakers of the world’s languages is fun and rewarding, but keeping all the resulting
   files and meta data organized? Converting files to archive formats? Transcription? Painful.
 
