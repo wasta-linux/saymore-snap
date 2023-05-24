@@ -65,10 +65,10 @@ apps:
     extensions: [gnome-3-38]
     command: bin/watch-procs
 
-  reinstall-dotnet:
-    # extensions: [gnome]
-    extensions: [gnome-3-38]
-    command: bin/sommelier winetricks -f -q dotnet462
+  # reinstall-dotnet:
+  #   # extensions: [gnome]
+  #   extensions: [gnome-3-38]
+  #   command: bin/sommelier winetricks -f -q dotnet462 # fails to reinstall
 
   remove-wine-prefix:
     # extensions: [gnome]
