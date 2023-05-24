@@ -3,7 +3,7 @@
 Install SayMore (via WINE) on a snap-enabled system.
 
 This needs to be installed with the `--devmode` flag because of how snap's
-confinement works, and how SayMore's "Welcome Screen"/"Main Window" handle
+confinement works, and how SayMore's Welcome Screen and Project Window handle
 switching back and forth to each other. Devmode also means that there will
 be no automatic updates. All updates have to be done manually, always
 remembering to use the `--devmode` flag.
@@ -38,7 +38,7 @@ sudo snap refresh saymore-unofficial --devmode
 
 ### Hung installation
 
-See if any processes have hung by using the *watch-procs* subcommand in a terminal:
+See if any processes have hung by using the `watch-procs` subcommand in a terminal:
 ```bash
 saymore-unofficial.watch-procs
 ```
@@ -47,15 +47,15 @@ then it has probably stalled.
 - If you started the installer in a terminal you can use Ctrl+C to stop it.
 - Regardless, you will probably need to use the terminal command `saymore-unofficial.kill-procs`
 to kill the background processes that will likely still be running.
-- Then run the app again, either from your app menu or from the terminal, and it will try to
-continue installation where it left off.
+- Then start the app again (from the apps menu or in a terminal) and it will continue installation
+where it left off.
 
 ### SayMore doesn't start
 
-Maybe the installation got corrupted, especially if it hung during the initial install
-and you had to try again.
+Maybe the installation got corrupted, especially if it hung during the initial install and you
+had to start it again.
 - Fully remove the WINE installation with the command `saymore-unofficial.remove-wine-prefix`.
-- Open the app again (normally or in a terminal) and it will reinstall the WINE prefix and SayMore.
+- Open the app again (from the apps menu or in a terminal) and it will reinstall the WINE prefix and SayMore.
 
 ### SayMore starts in a random "test" project
 
