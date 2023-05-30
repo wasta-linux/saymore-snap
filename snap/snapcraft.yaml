@@ -27,7 +27,7 @@ architectures:
 environment:
   SOMMELIER_NO_THEME: "true" # avoid crash b/c of Light theme
   SYSTEM_WGETRC: $SNAP/wine-runtime/etc/wgetrc
-  TRICKS: "fontsmooth=rgb corefonts dotnet462" # dotnet40 dotnet45 dotnet46 dotnet461 explicitly install all .NETs
+  TRICKS: "fontsmooth=rgb corefonts dotnet48" # dotnet40 dotnet45 dotnet46 dotnet461 dotnet462: all .NETs
   # WINEARCH: "win64"
   WINEARCH: "win32"
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
