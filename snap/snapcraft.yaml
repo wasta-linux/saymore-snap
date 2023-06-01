@@ -28,8 +28,7 @@ environment:
   SOMMELIER_NO_THEME: "true" # avoid crash b/c of Light theme
   SYSTEM_WGETRC: $SNAP/wine-runtime/etc/wgetrc
   TRICKS: "fontsmooth=rgb corefonts dotnet48" # dotnet40 dotnet45 dotnet46 dotnet461 dotnet462: all .NETs
-  # WINEARCH: "win64"
-  WINEARCH: "win32"
+  # WINEARCH: "win64" # default; needed for SayMore's ffmpeg
   WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
 
 apps:
@@ -40,8 +39,7 @@ apps:
     environment:
       INSTALL_EXE: "${SNAP}/data/SayMoreInstaller.3.5.1.msi"
       INSTALL_FLAGS: "/passive"
-      # RUN_EXE: "C:/Program Files (x86)/SayMore/SayMore.exe"
-      RUN_EXE: "C:/Program Files/SayMore/SayMore.exe"
+      RUN_EXE: "C:/Program Files (x86)/SayMore/SayMore.exe"
 
   init:
     # extensions: [gnome]
@@ -69,11 +67,6 @@ apps:
     # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/watch-procs
-
-  # reinstall-dotnet:
-  #   # extensions: [gnome]
-  #   extensions: [gnome-3-38]
-  #   command: bin/sommelier winetricks -f -q dotnet462 # fails to reinstall
 
   remove-wine-prefix:
     # extensions: [gnome]
@@ -105,15 +98,6 @@ plugs:
   removable-media:
   wayland:
   x11:
-
-  # wine-runtime-c22:
-  #   interface: content
-  #   target: $SNAP/wine-runtime
-  #   default-provider: wine-platform-runtime-core22
-  # wine-platform-7-stable-c22:
-  #   interface: content
-  #   target: $SNAP/wine-platform
-  #   default-provider: wine-platform-7-stable-core22
 
   wine-runtime-c20:
     interface: content
