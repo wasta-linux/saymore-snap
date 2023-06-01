@@ -78,7 +78,7 @@ apps:
   remove-wine-prefix:
     # extensions: [gnome]
     extensions: [gnome-3-38]
-    command: bin/sommelier winetricks annihilate
+    command: bin/remove-wine-prefix
 
   wine:
     # extensions: [gnome]

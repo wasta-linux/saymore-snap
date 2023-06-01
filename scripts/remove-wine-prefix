@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+wineprefix="${SNAP_USER_COMMON}/.wine"
+if [[ -d "$wineprefix" ]]; then
+    read -p "WARNING: You're about to delete $wineprefix and all it's contents. Are you sure? [y/N] :" ans
+    if [[ "${ans,,}" == 'y' ]]; then
+        rm -rf "$wineprefix"
+    fi
+fi
