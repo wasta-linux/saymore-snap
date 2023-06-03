@@ -9,28 +9,18 @@ pkill SayMore.exe
 "$WINELOADER" winecfg /v win10
 
 # Change DPI (set in setup hook).
-hex_dpi=$(printf '%.8X\n' "$WINEDPI")
+hex_dpi=$(printf '0x%.8X\n' "$WINEDPI")
+"$WINELOADER" reg add "HKLM\\System\\CurrentControlSet\\Hardware Profiles\\Current\\Software\\Fonts" \
+  /v "LogPixels" /t "REG_DWORD" /d "$hex_dpi" /f
+"$WINELOADER" reg add "HKCU\\Control Panel\\Desktop" \
+  /v "LogPixels" /t "REG_DWORD" /d "$hex_dpi" /f
 
-echo "REGEDIT4
-
-[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Hardware Profiles\Current\Software\Fonts]
-\"LogPixels\"=dword:$hex_dpi
-" > sysdpi.reg
-
-echo "REGEDIT4
-
-[HKEY_CURRENT_USER\Control Panel\Desktop]
-\"LogPixels\"=dword:$hex_dpi
-" > usrdpi.reg
-
-for r in usrdpi.reg sysdpi.reg; do
-   "$WINELOADER" regedit "$r"
-   rm -f "$r"
-done
+# Enable "Assembly binding logging".
+"$WINELOADER" reg add "HKLM\\Software\\Microsoft\\Fusion" /v "EnableLog" /t "REG_DWORD" /d "0x00000001" /f
 
 # Create initial Saymore.settings to allow overriding it's default values.
-mkdir -p "${WINEPREFIX}/drive_c/users/nate/AppData/Local/SayMore"
-sm_settings="${WINEPREFIX}/drive_c/users/nate/AppData/Local/SayMore/SayMore.settings"
+mkdir -p "${WINEPREFIX}/drive_c/users/${USER}/AppData/Local/SayMore"
+sm_settings="${WINEPREFIX}/drive_c/users/${USER}/AppData/Local/SayMore/SayMore.settings"
 
 if [[ ! -f "$sm_settings" ]]; then
   echo -e "<?xml version=\"1.0\" encoding=\"utf-8\"?>
