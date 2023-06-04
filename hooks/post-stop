@@ -15,7 +15,8 @@ if [[ ! -d "$user_settings_dir" ]]; then
 fi
 mkdir -p "$backup_dir"
 today=$(date -I)
-for name in "SayMore.settings"; do
+important_files=( "SayMore.settings" )
+for name in "${important_files[@]}"; do
     echo "Backing up ${user_settings_dir}/${name}..."
     if [[ -f "${user_settings_dir}/${name}" ]]; then
         cp -f "${user_settings_dir}/${name}" "${backup_dir}/${name}.${today}.bak"
