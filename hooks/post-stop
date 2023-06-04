@@ -4,7 +4,7 @@ echo "Checking for user settings to back up."
 
 # Make a backup of user settings.
 backup_dir="${SNAP_USER_COMMON}/backups"
-user_settings_dir="${SNAP_USER_COMMON}/.wine/drive_c/users/${USER}/AppData/Local/SayMore/"
+user_settings_dir="${SNAP_USER_COMMON}/.wine/drive_c/users/${USER}/AppData/Local/SayMore"
 if [[ ! -d "$user_settings_dir" ]]; then
     echo "No user config in $user_settings_dir"
     exit 0
