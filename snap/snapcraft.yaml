@@ -91,6 +91,7 @@ apps:
 plugs:
   # something that allows "ptrace" is needed for confinement to work; use --devmode as a workaround
   audio-playback:
+  audio-record:
   desktop:
   desktop-legacy:
   home:
