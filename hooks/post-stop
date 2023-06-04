@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [[ -z "$SNAP_USER_COMMON" ]]; then
+    # Not a snap installation.
+    exit 0
+fi
 echo "Checking for user settings to back up."
 
 # Make a backup of user settings.
