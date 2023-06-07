@@ -10,13 +10,13 @@ export INSTALL_FLAGS="/passive" # /qn for silent (MSI)
 # Set WINE environment variables.
 #export WINEARCH="win32" # won't work: ffmpeg binaries are 64-bit
 export WINEARCH="win64"
-export WINEDLLOVERRIDES="mscoree,mshtml="
+# export WINEDLLOVERRIDES="mscoree,mshtml="
 export WINELOADER="/snap/wine-platform-7-stable-core20/current/opt/wine-stable/bin/wine"
-export WINETRICKS="/snap/wine-platform-runtime-core20/current/bin/winetricks"
+# export WINETRICKS="/snap/wine-platform-runtime-core20/current/bin/winetricks"
+export WINETRICKS_LATEST_VERSION_CHECK='disabled'
 export WINEPREFIX="${APP_SHARE_DIR}/.wine"
 
 # Set wine-launch environment variables.
 # export INSTALL_EXE="$(xdg-user-dir DOWNLOAD)/SayMoreInstaller.3.5.1.msi"
 export INSTALL_EXE="${APP_SHARE_DIR}/data/SayMoreInstaller.3.5.1.msi"
 export RUN_EXE="${WINEPREFIX}/drive_c/Program Files (x86)/SayMore/SayMore.exe"
-

@@ -1,5 +1,20 @@
 #!/bin/env bash
 
+# Copy wine-gecko to .cache/wine.
+if [[ -n "$SNAP_USER_COMMON" ]]; then
+    winecache="${SNAP_USER_COMMON}/.cache/wine"
+    mkdir -p "$winecache"
+    base="$SNAP"
+    if [[ -n "$APP_SHARE_DIR" ]]; then
+        base="$APP_SHARE_DIR"
+    fi
+    cp -f "${base}/data/wine-gecko-2.47.2-x86.msi" "$winecache"
+    cp -f "${base}/data/wine-gecko-2.47.2-x86_64.msi" "$winecache"
+fi
+
+# Avoid prompt for wine-mono.
+export WINEDLLOVERRIDES="mscoree="
+
 # Use local SayMoreInstaller.*.msi if path is set.
 if [[ -e "$INSTALL_EXE" ]]; then
     export INSTALL_URL=
