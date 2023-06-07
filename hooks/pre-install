@@ -1,15 +1,14 @@
 #!/bin/env bash
 
-# Copy wine-gecko to .cache/wine.
+# Copy wine-gecko to .cache/wine and install.
+geckos=( "wine-gecko-2.47.2-x86.msi" "wine-gecko-2.47.2-x86_64.msi" )
 if [[ -n "$SNAP_USER_COMMON" ]]; then
-    winecache="${SNAP_USER_COMMON}/.cache/wine"
+    winecache="${XDG_CACHE_HOME}/wine"
     mkdir -p "$winecache"
-    base="$SNAP"
-    if [[ -n "$APP_SHARE_DIR" ]]; then
-        base="$APP_SHARE_DIR"
-    fi
-    cp -f "${base}/data/wine-gecko-2.47.2-x86.msi" "$winecache"
-    cp -f "${base}/data/wine-gecko-2.47.2-x86_64.msi" "$winecache"
+    for g in "${geckos[@]}"; do
+        cp -f "${SNAP}/data/${g}" "$winecache"
+        "$WINELOADER" msiexec /i "${winecache}/${g}"
+    done
 fi
 
 # Avoid prompt for wine-mono.

@@ -1,6 +1,4 @@
 #!/bin/env bash
 
-# # Remove mscoree from WINEDLLOVERRIDES to allow the app to run.
-# #    (It's still needed before this point for wineprefix setup, though.)
-# WINEDLLOVERRIDES=$(echo "$WINEDLLOVERRIDES" | sed -r 's/[,;]?mscoree[,;]?//')
-# export WINEDLLOVERRIDES
+# Unset all DLL overrides.
+export WINEDLLOVERRIDES=

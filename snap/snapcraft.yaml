@@ -27,13 +27,12 @@ architectures:
 environment:
   SOMMELIER_NO_THEME: "true" # avoid crash b/c of Light theme
   SYSTEM_WGETRC: $SNAP/wine-runtime/etc/wgetrc
-  TRICKS: "fontsmooth=rgb corefonts dotnet48" # dotnet40 dotnet45 dotnet46 dotnet461 dotnet462: all .NETs
+  TRICKS: "fontsmooth=rgb corefonts dotnet48"
   # WINEARCH: "win64" # default; needed for SayMore's ffmpeg
-  # WINEDLLOVERRIDES: "mscoree,mshtml=" # handled in pre-install hook
+  WINEDLLOVERRIDES: "mscoree,mshtml=" # avoid prompts during wineboot --init
 
 apps:
   saymore-unofficial:
-    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/sommelier run-exe
     environment:
@@ -42,49 +41,40 @@ apps:
       RUN_EXE: "C:/Program Files (x86)/SayMore/SayMore.exe"
 
   init:
-    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/sommelier
     environment:
       INIT: '1'
 
   kill-saymore:
-    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/kill-saymore
 
   kill-procs:
-    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/kill-procs
 
   list-procs:
-    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/list-procs
   
   watch-procs:
-    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/watch-procs
 
   remove-wine-prefix:
-    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/remove-wine-prefix
 
   wine:
-    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/sommelier $WINELOADER
 
   winecfg:
-    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/sommelier winecfg
 
   winetricks:
-    # extensions: [gnome]
     extensions: [gnome-3-38]
     command: bin/sommelier winetricks
 
