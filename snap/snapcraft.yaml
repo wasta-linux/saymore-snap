@@ -29,7 +29,7 @@ environment:
   SYSTEM_WGETRC: $SNAP/wine-runtime/etc/wgetrc
   TRICKS: "fontsmooth=rgb corefonts dotnet48" # dotnet40 dotnet45 dotnet46 dotnet461 dotnet462: all .NETs
   # WINEARCH: "win64" # default; needed for SayMore's ffmpeg
-  WINEDLLOVERRIDES: "mscoree,mshtml=" # Prevent pop-ups about Wine Mono and Wine Gecko
+  # WINEDLLOVERRIDES: "mscoree,mshtml=" # handled in pre-install hook
 
 apps:
   saymore-unofficial:
