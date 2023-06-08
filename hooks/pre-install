@@ -11,8 +11,10 @@ if [[ -n "$SNAP_USER_COMMON" ]]; then
     done
 fi
 
-# Avoid prompt for wine-mono.
-export WINEDLLOVERRIDES="mscoree="
+# # Avoid prompt for wine-mono. # at this point dotnet48 should be installed
+# export WINEDLLOVERRIDES="mscoree="
+# Reset DLL overrides.
+export WINEDLLOVERRIDES=
 
 # Use local SayMoreInstaller.*.msi if path is set.
 if [[ -e "$INSTALL_EXE" ]]; then
