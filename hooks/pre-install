@@ -1,5 +1,8 @@
 #!/bin/env bash
 
+# Reset DLL overrides after wineboot --init & dotnet48 installation.
+export WINEDLLOVERRIDES=
+
 # Copy wine-gecko to .cache/wine and install.
 geckos=( "wine-gecko-2.47.2-x86.msi" "wine-gecko-2.47.2-x86_64.msi" )
 if [[ -n "$SNAP_USER_COMMON" ]]; then
@@ -10,11 +13,6 @@ if [[ -n "$SNAP_USER_COMMON" ]]; then
         "$WINELOADER" msiexec /i "${winecache}/${g}"
     done
 fi
-
-# # Avoid prompt for wine-mono. # at this point dotnet48 should be installed
-# export WINEDLLOVERRIDES="mscoree="
-# Reset DLL overrides.
-export WINEDLLOVERRIDES=
 
 # Use local SayMoreInstaller.*.msi if path is set.
 if [[ -e "$INSTALL_EXE" ]]; then
