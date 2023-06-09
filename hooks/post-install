@@ -1,8 +1,5 @@
 #!/bin/env bash
 
-# # Remove DLL overrides used during app install.
-# export WINEDLLOVERRIDES=
-
 # Kill SayMore b/c it starts as part of install in addition to run,
 #   which doesn't allow pre-start script to run. The launch script 
 #   will start it again, at the correct time.
