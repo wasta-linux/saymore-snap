@@ -18,6 +18,10 @@ hex_dpi=$(printf '0x%.8X\n' "$WINEDPI")
 # Enable "Assembly binding logging".
 "$WINELOADER" reg add "HKLM\\Software\\Microsoft\\Fusion" /v "EnableLog" /t "REG_DWORD" /d "0x00000001" /f
 
+# Make SayMore use native text editor.
+"$WINELOADER" reg add "HKCR\\txtfile\\shell\\open\\command" \
+  /v "@" /t "REG_SZ" /d '"C:\windows\system32\winebrowser.exe" "%1"' /f
+
 # Create initial Saymore.settings to allow overriding it's default values.
 mkdir -p "${WINEPREFIX}/drive_c/users/${USER}/AppData/Local/SayMore"
 sm_settings="${WINEPREFIX}/drive_c/users/${USER}/AppData/Local/SayMore/SayMore.settings"
