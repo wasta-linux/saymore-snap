@@ -8,7 +8,7 @@ pkill SayMore.exe
 # Set Winver to 10.
 "$WINELOADER" winecfg /v win10
 
-# Change DPI (set in setup hook).
+# Change DPI (set in setup and/or pre-install hook).
 hex_dpi=$(printf '0x%.8X\n' "$WINEDPI")
 "$WINELOADER" reg add "HKLM\\System\\CurrentControlSet\\Hardware Profiles\\Current\\Software\\Fonts" \
   /v "LogPixels" /t "REG_DWORD" /d "$hex_dpi" /f
@@ -21,6 +21,24 @@ hex_dpi=$(printf '0x%.8X\n' "$WINEDPI")
 # Make SayMore use native text editor.
 "$WINELOADER" reg add "HKCR\\txtfile\\shell\\open\\command" \
   /v "@" /t "REG_SZ" /d '"C:\windows\system32\winebrowser.exe" "%1"' /f
+
+# Add user folders to file browser Favorites.
+user_dirs=(
+    DESKTOP
+    DOWNLOAD
+    DOCUMENTS
+    MUSIC
+    PICTURES
+    VIDEOS
+)
+wine_faves="${WINEPREFIX}/drive_c/users/${USER}/Favorites"
+for d in "${user_dirs[@]}"; do
+    dpath="$(xdg-user-dir "$d")"
+    dname="$(basename "$dpath")"
+    if [[ -d "$dpath" ]]; then
+      ln -s "$dpath" "${wine_faves}/${dname}"
+    fi
+done
 
 # Create initial Saymore.settings to allow overriding it's default values.
 mkdir -p "${WINEPREFIX}/drive_c/users/${USER}/AppData/Local/SayMore"
