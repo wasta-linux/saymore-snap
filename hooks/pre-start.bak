@@ -1,4 +1,0 @@
-#!/bin/env bash
-
-# # Unset all DLL overrides.
-# export WINEDLLOVERRIDES=
